@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Dziki Zachód 2018</string>
+    <string name="fragment_home_name">Strona Główna</string>
+    <string name="fragment_mapa_name">Mapa</string>
+    <string name="fragment_program_name">Program</string>
+    <string name="fragment_bilety_name">Bilety</string>
+    <string name="fragment_gwiazdy_szeryfa_name">Gwiazdy Szeryfa</string>
+    <string name="fragment_spolecznosc_name">Społeczność</string>
+    <string name="fragment_info_name">Informacje</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
