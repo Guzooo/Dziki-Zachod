@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".GwiazdaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- TODO: Poczytać odnośnie QR w androidzie -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:text="Zbieranie gwiazd szeryfa, przydzielane po zeskanowaniu kodu QR.\n\n-porozrucane kody można by szukać na terenie\n-jak aktywności można tworzyć w unity to mam pomysł na małą grę w której też będzie się zbierać te gwiazdki\n-drukowane wraz z paragonem (mało prawdopodobne że to ogarnę na ten rok)\n\nZa odpowiednią ilość gwiazdek można wziąść udział w losowaniu" />
 
 </FrameLayout>

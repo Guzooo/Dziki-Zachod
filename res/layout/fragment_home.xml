@@ -1,13 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ABC" />
-
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:text='Witamy na XII edycji "Dzikiego Zachodu w Kurozwękach"'/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ulubione wydarzenia:"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybrane przez użytkownika wydarzenia"
+        android:textStyle="italic"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ulubione miejsca:"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybrane przez użytkownika miejsca"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proponowane wydarzenia:"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybrane przez nas wydarzenia"
+        android:textStyle="italic"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Proponowane miejsca:"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybrane przez nas miejsca"
+        android:textStyle="italic"/>
+</LinearLayout>

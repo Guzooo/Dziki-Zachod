@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 public class StartActivity extends Activity implements ActionBar.TabListener {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
@@ -22,7 +21,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
 
         sectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
         viewPager = findViewById(R.id.startViewPager);
@@ -86,11 +84,23 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             switch (getArguments().getInt(ARG_NUMER)){
                 case 0:
                     return inflater.inflate(R.layout.fragment_home,constainer,false);
+                case 1:
+                    return inflater.inflate(R.layout.fragment_map,constainer,false);
+                case 2:
+                    return inflater.inflate(R.layout.fragment_program,constainer,false);
+                case 3:
+                    return inflater.inflate(R.layout.fragment_bilety,constainer,false);
+                case 4:
+                    return inflater.inflate(R.layout.fragment_gwiazda,constainer,false);
+                case 5:
+                    return inflater.inflate(R.layout.fragment_spolecznosc,constainer,false);
+                case 6:
+                    return inflater.inflate(R.layout.fragment_info,constainer,false);
             }
             return null;
         }
     }
-
+    //TODO: FragmentStatePagerAdapter gdy bedzię cieło
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fragmentManager) {
