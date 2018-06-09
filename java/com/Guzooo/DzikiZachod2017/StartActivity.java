@@ -8,9 +8,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class StartActivity extends Activity implements ActionBar.TabListener {
 
@@ -68,38 +65,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
     }
 
-    public static class PlaceholderFragmnent extends Fragment{
-        private static final String  ARG_NUMER = "section_number";
-
-        public static PlaceholderFragmnent newInstance (int sectionNumber){
-            PlaceholderFragmnent fragmnent = new PlaceholderFragmnent();
-            Bundle args = new Bundle();
-            args.putInt(ARG_NUMER, sectionNumber);
-            fragmnent.setArguments(args);
-            return fragmnent;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup constainer, Bundle savedInstanceState){
-            switch (getArguments().getInt(ARG_NUMER)){
-                case 0:
-                    return inflater.inflate(R.layout.fragment_home,constainer,false);
-                case 1:
-                    return inflater.inflate(R.layout.fragment_map,constainer,false);
-                case 2:
-                    return inflater.inflate(R.layout.fragment_program,constainer,false);
-                case 3:
-                    return inflater.inflate(R.layout.fragment_bilety,constainer,false);
-                case 4:
-                    return inflater.inflate(R.layout.fragment_gwiazda,constainer,false);
-                case 5:
-                    return inflater.inflate(R.layout.fragment_spolecznosc,constainer,false);
-                case 6:
-                    return inflater.inflate(R.layout.fragment_info,constainer,false);
-            }
-            return null;
-        }
-    }
     //TODO: FragmentStatePagerAdapter gdy bedzię cieło
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -109,7 +74,23 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public Fragment getItem(int position) {
-            return PlaceholderFragmnent.newInstance(position);
+            switch (position){
+                case 0:
+                    return new HomeFragment();
+                case 1:
+                    return new MapFragment();
+                case 2:
+                    return new ProgramFragment();
+                case 3:
+                    return new BiletyFragment();
+                case 4:
+                    return new GwiazdaFragment();
+                case 5:
+                    return new SpolecznoscFragment();
+                case 6:
+                    return new InfoFragment();
+            }
+            return null;
         }
 
         @Override

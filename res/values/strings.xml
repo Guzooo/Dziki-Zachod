@@ -8,6 +8,7 @@
     <string name="fragment_spolecznosc_name">Społeczność</string>
     <string name="fragment_info_name">Informacje</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="program_day_pt">Piątek</string>
+    <string name="program_day_sob">Sobota</string>
+    <string name="program_day_nd">Niedziela</string>
 </resources>
