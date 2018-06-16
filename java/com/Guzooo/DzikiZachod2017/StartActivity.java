@@ -8,11 +8,13 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 public class StartActivity extends Activity implements ActionBar.TabListener {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
+    private int aktualnyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
+                aktualnyFragment = position;
             }
 
             @Override
@@ -119,4 +122,14 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             return null;
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        if(aktualnyFragment != 0){
+            viewPager.setCurrentItem(0);
+        }else {
+            super.onBackPressed();
+        }
+    }
+
 }

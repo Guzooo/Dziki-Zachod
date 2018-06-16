@@ -16,7 +16,7 @@ public class SpolecznoscFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+//TODO: symbol ładowania
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

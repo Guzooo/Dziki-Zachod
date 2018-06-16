@@ -11,4 +11,22 @@
     <string name="program_day_pt">Piątek</string>
     <string name="program_day_sob">Sobota</string>
     <string name="program_day_nd">Niedziela</string>
+
+    <string name="program_otwarcie_imprezy">Otwarcie imprezy</string>
+    <string name="program_taniec_indian">Pokaz tańców indiańskich</string>
+    <string name="program_taniec_country">Pokaz tańców country</string>
+    <string name="program_rozpoczencie_imprezy">Rozpoczęcie imprezy</string>
+    <string name="program_spektakl_dla_dzieci">Spektakl teatralny dla dzieci</string>
+    <string name="program_fajerwerki">Pokaz fajerwerków</string>
+    <string name="program_koniec">Zakończenie imprezy</string>
+    
+    <string name="program_opis_otwarcie_imprezy">Uroczyste rozpoczęcie imprezy "Dziki Zachód 2018"</string>
+    <string name="program_opis_taniec_indian">Tańce indiańskie w wykonianiu grupu WOKINI</string>
+    <string name="program_opis_taniec_country">Tańce country w wykonianiu grupy DANCING RIDERS</string>
+    <string name="program_opis_rozpoczecie_imprezy_1">Impreze rozpocznie gwazda1</string>
+    <string name="program_opis_rozpoczecie_imprezy_2">Impreze rozpocznie gwiazda2</string>
+    <string name="program_opis_spektakl_dla_dzieci">Spektakl dla dzieci</string>
+    <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
+    <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
+
 </resources>

@@ -4,4 +4,13 @@
         <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
     </style>
+
+    <style name="ButtonNormal" parent="AppTheme">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:colorButtonNormal">@color/colorPrimary</item>
+    </style>
+
+    <style name="ButtonActive" parent="AppTheme">
+        <item name="android:colorButtonNormal">@color/colorPrimaryDark</item>
+    </style>
 </resources>
