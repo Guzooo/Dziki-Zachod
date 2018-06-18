@@ -40,6 +40,8 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
         programRecycle = layout.findViewById(R.id.program_recycle);
 
+        ReadingDatabase(R.string.program_day_pt);
+
         return layout;
     }
 
@@ -89,6 +91,8 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+
+    //TODO: sprawdzić onDestroy() czy super jest na początku czy końcu
     @Override
     public void onDestroy() {
         super.onDestroy();

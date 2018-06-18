@@ -29,4 +29,11 @@
     <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
     <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
 
+    <string name="bilety_normal_price">normalny %1$dzł</string>
+    <string name="bilety_reduced_price">ulgowy %1$dzł</string>
+
+    <string name="bilety_safari">Safari Bizon</string>
+    <string name="bilety_palac">Zwiedzanie Pałacu</string>
+    <string name="bilety_lochy">Zwiedzanie Lochów</string>
+    <string name="bilety_labirynt">Labirynt</string>
 </resources>

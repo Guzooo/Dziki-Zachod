@@ -17,7 +17,9 @@ public class SpolecznoscFragment extends Fragment {
     }
 
 //TODO: symbol ładowania
-    @Override
+//TODO: ograniczenie wychodzenia z hasztagu
+//TODO: symbol brak internetu
+   @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View layout = inflater.inflate(R.layout.fragment_spolecznosc, container, false);

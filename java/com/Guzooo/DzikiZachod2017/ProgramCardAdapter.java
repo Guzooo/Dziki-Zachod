@@ -21,7 +21,7 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
 
     @Override
     public ProgramCardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.program_card,parent,false);
+        CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate(R.layout.program_card, parent, false);
         return new ViewHolder(cv);
     }
 
