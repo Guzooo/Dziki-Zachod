@@ -1,6 +1,7 @@
 package com.Guzooo.DzikiZachod2017;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -22,10 +23,13 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
     private SQLiteDatabase db;
     private Cursor cursor;
 
+    private Button btnOld;
+
     public ProgramFragment() {
         // Required empty public constructor
     }
 
+    //TODO: Tytuł dnia zamiast nazwy aplikacji
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_program, container, false);
@@ -40,8 +44,25 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
         programRecycle = layout.findViewById(R.id.program_recycle);
 
-        ReadingDatabase(R.string.program_day_pt);
+        if(cursor == null) {
+            onClickPiatek(btnPiatek);
+        } else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+            programRecycle.setLayoutManager(layoutManager);
+            adapter = new ProgramCardAdapter(cursor);
+            programRecycle.setAdapter(adapter);
 
+            adapter.setListener(new ProgramCardAdapter.Listener() {
+                @Override
+                public void onClick(int id) {
+                    Intent intent = new Intent(getActivity(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    getActivity().startActivity(intent);
+                }
+            });
+
+            btnOld.setTextColor(getResources().getColor(R.color.pressedText));
+        }
         return layout;
     }
 
@@ -62,14 +83,25 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
     public void  onClickPiatek(View v){
         ReadingDatabase(R.string.program_day_pt);
+        ResetButtons((Button) v);
     }
 
     public void  onClickSobota(View v){
         ReadingDatabase(R.string.program_day_sob);
+        ResetButtons((Button) v);
     }
 
     public void  onClickNiedziela(View v){
         ReadingDatabase(R.string.program_day_nd);
+        ResetButtons((Button) v);
+    }
+
+    private void ResetButtons(Button b){
+        if(btnOld != null){
+            btnOld.setTextColor(b.getTextColors());
+        }
+        b.setTextColor(getResources().getColor(R.color.pressedText));
+        btnOld = b;
     }
 
     private void ReadingDatabase(int day){
@@ -77,7 +109,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
             SQLiteOpenHelper openHelper = new ProgramHelper(getActivity());
             db = openHelper.getReadableDatabase();
             cursor = db.query("EVENTS",
-                    new String[]{"NAME", "TIME_START", "TIME_END"},
+                    new String[]{"_id", "NAME", "TIME_START", "TIME_END"},
                     "DAY = ?",
                     new String[] {Integer.toString(day)},
                     null, null,
@@ -86,13 +118,20 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
             programRecycle.setLayoutManager(layoutManager);
             adapter = new ProgramCardAdapter(cursor);
             programRecycle.setAdapter(adapter);
+
+            adapter.setListener(new ProgramCardAdapter.Listener() {
+                @Override
+                public void onClick(int id) {
+                    Intent intent = new Intent(getActivity(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    getActivity().startActivity(intent);
+                }
+            });
         }catch (SQLiteException e){
             Toast.makeText(getActivity(), "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
         }
     }
 
-
-    //TODO: sprawdzić onDestroy() czy super jest na początku czy końcu
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -14,7 +14,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
     private SectionsPagerAdapter sectionsPagerAdapter;
     private ViewPager viewPager;
-    private int aktualnyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
-                aktualnyFragment = position;
             }
 
             @Override
@@ -125,7 +123,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onBackPressed(){
-        if(aktualnyFragment != 0){
+        if(viewPager.getCurrentItem() != 0){
             viewPager.setCurrentItem(0);
         }else {
             super.onBackPressed();

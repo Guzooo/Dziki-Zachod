@@ -19,7 +19,7 @@
     <string name="program_spektakl_dla_dzieci">Spektakl teatralny dla dzieci</string>
     <string name="program_fajerwerki">Pokaz fajerwerków</string>
     <string name="program_koniec">Zakończenie imprezy</string>
-    
+
     <string name="program_opis_otwarcie_imprezy">Uroczyste rozpoczęcie imprezy "Dziki Zachód 2018"</string>
     <string name="program_opis_taniec_indian">Tańce indiańskie w wykonianiu grupu WOKINI</string>
     <string name="program_opis_taniec_country">Tańce country w wykonianiu grupy DANCING RIDERS</string>
@@ -29,6 +29,10 @@
     <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
     <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
 
+    <string name="wydarzenie_favorite">Ulubiony</string>
+    <string name="wydarzenie_te_same">To wydarzenie w innym czasie</string>
+    <string name="wydarzenie_ten_czas">Inne wydarzenia w tym czasie</string>
+    
     <string name="bilety_normal_price">normalny %1$dzł</string>
     <string name="bilety_reduced_price">ulgowy %1$dzł</string>
 
