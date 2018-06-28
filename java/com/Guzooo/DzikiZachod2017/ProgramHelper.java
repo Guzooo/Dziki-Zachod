@@ -36,8 +36,8 @@ public class ProgramHelper extends SQLiteOpenHelper {
                     + "TIME_END INTEGER, "
                     + "DAY INTEGER, "
                     + "DESCRIPTION INTEGER, "
-                    + "IMAGE_RSC, "
-                    + "FAVORITE)");
+                    + "IMAGE_RSC INTEGER, "
+                    + "FAVORITE INTEGER)");
             AddEvent(db,R.string.program_taniec_country, 990,1020,R.string.program_day_pt,R.string.program_opis_taniec_country,0,0);
             AddEvent(db, R.string.program_otwarcie_imprezy,900, 960,R.string.program_day_pt,R.string.program_opis_otwarcie_imprezy,0,0);
             AddEvent(db, R.string.program_taniec_indian,960,990,R.string.program_day_pt,R.string.program_opis_taniec_indian,0,0);

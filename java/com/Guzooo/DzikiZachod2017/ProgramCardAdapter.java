@@ -36,11 +36,15 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         CardView cardView = holder.cardView;
         TextView textTitle = cardView.findViewById(R.id.textTitle);
         TextView textTime = cardView.findViewById(R.id.textTime);
+        TextView textDay = cardView.findViewById(R.id.textDay);
         if (cursor.moveToPosition(position)) {
+            if(cursor.getColumnCount() == 5){
+                textDay.setText(cursor.getInt(4));
+            }
             textTitle.setText(cursor.getInt(1));
             int hour = cursor.getInt(2)/60;
             int minute = cursor.getInt(2) % 60;
