@@ -32,7 +32,7 @@
     <string name="wydarzenie_favorite">Ulubiony</string>
     <string name="wydarzenie_te_same">To wydarzenie w innym czasie</string>
     <string name="wydarzenie_ten_czas">Inne wydarzenia w tym czasie</string>
-    
+
     <string name="bilety_normal_price">normalny %1$dzł</string>
     <string name="bilety_reduced_price">ulgowy %1$dzł</string>
 
@@ -40,4 +40,7 @@
     <string name="bilety_palac">Zwiedzanie Pałacu</string>
     <string name="bilety_lochy">Zwiedzanie Lochów</string>
     <string name="bilety_labirynt">Labirynt</string>
+
+    <string name="mapa_title_tur">Tury</string>
+    <string name="mapa_title_strus">Struś</string>
 </resources>

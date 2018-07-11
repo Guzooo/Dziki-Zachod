@@ -5,10 +5,13 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class StartActivity extends Activity implements ActionBar.TabListener {
 
@@ -79,16 +82,14 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 0:
                     return new HomeFragment();
                 case 1:
-                    return new MapFragment();
-                case 2:
                     return new ProgramFragment();
-                case 3:
+                case 2:
                     return new BiletyFragment();
-                case 4:
+                case 3:
                     return new GwiazdaFragment();
-                case 5:
+                case 4:
                     return new SpolecznoscFragment();
-                case 6:
+                case 5:
                     return new InfoFragment();
             }
             return null;
@@ -96,7 +97,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public int getCount() {
-            return 7;
+            return 6;
         }
 
         @Override
@@ -105,20 +106,38 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 0:
                     return "" + getString(R.string.fragment_home_name);
                 case 1:
-                    return "" + getString(R.string.fragment_mapa_name);
-                case 2:
                     return "" + getString(R.string.fragment_program_name);
-                case 3:
+                case 2:
                     return "" + getString(R.string.fragment_bilety_name);
-                case 4:
+                case 3:
                     return "" + getString(R.string.fragment_gwiazdy_szeryfa_name);
-                case 5:
+                case 4:
                     return "" + getString(R.string.fragment_spolecznosc_name);
-                case 6:
+                case 5:
                     return "" + getString(R.string.fragment_info_name);
             }
             return null;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_activity_start, menu);
+        menu.getItem(0).setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_map:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override
@@ -129,5 +148,4 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             super.onBackPressed();
         }
     }
-
 }

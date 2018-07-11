@@ -9,11 +9,9 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
@@ -64,7 +62,6 @@ public class HomeFragment extends Fragment {
         } catch (SQLiteException e) {
             Toast.makeText(getActivity(), "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
         }
-        Log.d("HOME",cursor.getColumnCount()+"");
     }
 
     @Override
