@@ -2,6 +2,7 @@ package com.Guzooo.DzikiZachod2017;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -9,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -26,6 +26,7 @@ public class WydarzenieActivity extends Activity {
     private int description;
     private int imageRSC;
     private boolean favorite;
+    private int place;
 
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -35,19 +36,18 @@ public class WydarzenieActivity extends Activity {
     //TODO: wyswietlanie komunikatu BRAK
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Wydarzenie","Dzień Dobry");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wydarzenie);
 
         TextView txtTime = findViewById(R.id.wydarzenie_time);
         TextView txtDescription = findViewById(R.id.wydarzenie_description);
-        CheckBox Checkfavorite = findViewById(R.id.wydarzenie_favorite);
+        CheckBox checkFavorite = findViewById(R.id.wydarzenie_favorite);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             SQLiteDatabase db = openHelper.getReadableDatabase();
             Cursor cursor = db.query("EVENTS",
-                    new String[]{"NAME", "TIME_START", "TIME_END", "DAY", "DESCRIPTION", "IMAGE_RSC", "FAVORITE"},
+                    new String[]{"NAME", "TIME_START", "TIME_END", "DAY", "DESCRIPTION", "IMAGE_RSC", "FAVORITE", "PLACE"},
                     "_id = ?",
                     new String[]{Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null, null);
@@ -60,6 +60,7 @@ public class WydarzenieActivity extends Activity {
                 description = cursor.getInt(4);
                 imageRSC = cursor.getInt(5);
                 favorite = (cursor.getInt(6) == 1);
+                place = cursor.getInt(7);
             }
 
             cursor.close();
@@ -89,7 +90,7 @@ public class WydarzenieActivity extends Activity {
 
         txtDescription.setText(getString(description));
 
-        Checkfavorite.setChecked(favorite);
+        checkFavorite.setChecked(favorite);
 
         onClickInneWydarzenia(null);
     }
@@ -132,6 +133,9 @@ public class WydarzenieActivity extends Activity {
             adapter.setListener(new ProgramCardAdapter.Listener() {
                 @Override
                 public void onClick(int id) {
+                    Intent intent = new Intent(getApplicationContext(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    startActivity(intent);
                 }
             });
         }catch (SQLiteException e){
@@ -158,6 +162,9 @@ public class WydarzenieActivity extends Activity {
             adapter.setListener(new ProgramCardAdapter.Listener() {
                 @Override
                 public void onClick(int id) {
+                    Intent intent = new Intent(getApplicationContext(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    startActivity(intent);
                 }
             });
         }catch (SQLiteException e){

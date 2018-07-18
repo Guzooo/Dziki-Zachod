@@ -29,9 +29,12 @@
     <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
     <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
 
-    <string name="wydarzenie_favorite">Ulubiony</string>
     <string name="wydarzenie_te_same">To wydarzenie w innym czasie</string>
     <string name="wydarzenie_ten_czas">Inne wydarzenia w tym czasie</string>
+
+    <string name="place_wydarzenia">Wydarzenia w tym miejscu</string>
+
+    <string name="check_box_favorite">Ulubiony</string>
 
     <string name="bilety_normal_price">normalny %1$dzł</string>
     <string name="bilety_reduced_price">ulgowy %1$dzł</string>
@@ -41,6 +44,18 @@
     <string name="bilety_lochy">Zwiedzanie Lochów</string>
     <string name="bilety_labirynt">Labirynt</string>
 
-    <string name="mapa_title_tur">Tury</string>
-    <string name="mapa_title_strus">Struś</string>
+    <string name="mapa_type_zoo">Zwierzyniec</string>
+    <string name="mapa_type_eat">Żywność</string>
+    <string name="mapa_type_other">inne</string>
+
+    <string name="mapa_title_scena">Scena</string>
+    <string name="mapa_title_pizza">Pizzeria Ancona</string>
+    <string name="mapa_title_wiata">Bizon Grill</string>
+
+    <string name="mapa_snippet_scena">Miejsce występów</string>
+    <string name="mapa_snippet_pizza">Pyszne pizze prosto z pieca</string>
+    <string name="mapa_snippet_wiata">Hamburgery, hot-dogi, frytki, dania z grilla</string>
+
+    <string name="mapa_other_title_tur">Tury</string>
+    <string name="mapa_other_title_strus">Struś</string>
 </resources>

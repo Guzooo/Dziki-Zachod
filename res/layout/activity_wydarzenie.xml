@@ -34,7 +34,7 @@
                 android:id="@+id/wydarzenie_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/wydarzenie_favorite"
+                android:text="@string/check_box_favorite"
                 android:onClick="onClickFavorite"/>
         </LinearLayout>
 

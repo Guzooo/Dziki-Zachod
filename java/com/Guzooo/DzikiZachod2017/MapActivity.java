@@ -1,9 +1,14 @@
 package com.Guzooo.DzikiZachod2017;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,9 +18,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    private ArrayList<Marker> typeZoo = new ArrayList<>();
+    private ArrayList<Marker> typeEat = new ArrayList<>();
+    private ArrayList<Marker> typeOther = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +63,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             public View getInfoWindow(Marker marker) {
                 if(marker.getTitle() == null) {
                     Intent intent = new Intent(getApplicationContext(), PlaceActivity.class);
-                    intent.putExtra(PlaceActivity.EXTRA_ID, marker.getId());
+                    intent.putExtra(PlaceActivity.EXTRA_ID, Integer.parseInt(marker.getSnippet()));
                     startActivity(intent);
                 }
                 return null;
@@ -64,26 +75,80 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        createPlece(1,50.596402f,  21.099829f);
-        createPlece(2, 50.597148f, 21.100830f);
-        createPlece(3, 50.595793f, 21.100779f);
+        createPlece(R.string.mapa_type_other, typeOther);
+        createPlece(R.string.mapa_type_eat, typeEat);
 
-        createPlaceOther(R.string.mapa_title_tur,0,50.597338f,21.098513f);
-        createPlaceOther(R.string.mapa_title_strus,0, 50.596267f, 21.101448f);
+        showPlaceOther(R.string.mapa_type_zoo, typeZoo);
     }
 
-    private void createPlece (int id, float Y, float X) {
-        mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(Y, X))
-                .snippet(Integer.toString(id)));
+    private void createPlece (int type, ArrayList<Marker> list) {
+        if(list.isEmpty()) {
+            try {
+                SQLiteOpenHelper openHelper = new ProgramHelper(this);
+                SQLiteDatabase db = openHelper.getReadableDatabase();
+                Cursor cursor = db.query("PLACES",
+                        new String[]{"_id", "Y", "X"},
+                        "TYPE = ?",
+                        new String[]{Integer.toString(type)},
+                        null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(cursor.getFloat(1), cursor.getFloat(2)))
+                                .snippet(Integer.toString(cursor.getInt(0)))));
+                    } while (cursor.moveToNext());
+
+                    cursor.close();
+                    db.close();
+                }
+            } catch (SQLiteException e) {
+                Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            for (int i = 0; i < list.size(); i++){
+                mMap.addMarker(new MarkerOptions()
+                                .position(list.get(i).getPosition())
+                                .snippet(list.get(i).getSnippet()));
+            }
+        }
     }
 
-    private void createPlaceOther(int name, int description, float Y, float X){
-        Marker marker = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(Y, X))
-                .title(getString(name)));
-        if(description != 0){
-            marker.setSnippet(getString(description));
+    private void showPlaceOther(int type, ArrayList<Marker> list){
+        if(list.isEmpty()) {
+            try {
+                SQLiteOpenHelper openHelper = new ProgramHelper(this);
+                SQLiteDatabase db = openHelper.getReadableDatabase();
+                Cursor cursor = db.query("PLACESOTHER",
+                        new String[]{"NAME", "DESCRIPTION", "Y", "X"},
+                        "TYPE = ?",
+                        new String[]{Integer.toString(type)},
+                        null, null, null);
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        list.add(mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(cursor.getFloat(2), cursor.getFloat(3)))
+                                .title(getString(cursor.getInt(0)))));
+
+                        if (cursor.getInt(1) != 0) {
+                            list.get(list.size() - 1).setSnippet(getString(cursor.getInt(1)));
+                        }
+                    } while (cursor.moveToNext());
+
+                    cursor.close();
+                    db.close();
+                }
+            } catch (SQLiteException e) {
+                Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            for (int i = 0; i < list.size(); i++){
+                mMap.addMarker(new MarkerOptions()
+                        .position(list.get(i).getPosition())
+                        .title(list.get(i).getTitle())
+                        .snippet(list.get(i).getSnippet()));
+            }
         }
     }
 }
