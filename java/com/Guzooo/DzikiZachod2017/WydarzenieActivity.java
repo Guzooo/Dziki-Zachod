@@ -149,10 +149,10 @@ public class WydarzenieActivity extends Activity {
             db = openHelper.getReadableDatabase();
             cursor = db.query("EVENTS",
                     new String[]{"_id", "DAY", "TIME_START", "TIME_END"},
-                    "NAME = ? AND _id != ? AND (DAY = ? OR DAY = ? OR DAY = ?)",
-                    new String[] {Integer.toString(name),Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0)), Integer.toString(R.string.program_day_pt), Integer.toString(R.string.program_day_sob), Integer.toString(R.string.program_day_nd)},
+                    "NAME = ? AND _id != ?",
+                    new String[] {Integer.toString(name),Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null,
-                    null);
+                    "DAY, TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);

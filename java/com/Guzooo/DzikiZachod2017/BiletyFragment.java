@@ -10,10 +10,6 @@ import android.view.ViewGroup;
 
 public class BiletyFragment extends Fragment {
 
-    private String[] titles;
-    private String[] normalPrices;
-    private String[] reducedPrices;
-
     public BiletyFragment() {
         // Required empty public constructor
     }
@@ -24,9 +20,9 @@ public class BiletyFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_bilety, container, false);
 
         String[] titles = new String[] {
-                getString(R.string.program_day_pt),
-                getString(R.string.program_day_sob),
-                getString(R.string.program_day_nd),
+                getString(R.string.program_day_1),
+                getString(R.string.program_day_2),
+                getString(R.string.program_day_3),
                 getString(R.string.bilety_safari),
                 getString(R.string.bilety_palac),
                 getString(R.string.bilety_lochy),

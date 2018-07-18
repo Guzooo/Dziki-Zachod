@@ -8,9 +8,9 @@
     <string name="fragment_spolecznosc_name">Społeczność</string>
     <string name="fragment_info_name">Informacje</string>
 
-    <string name="program_day_pt">Piątek</string>
-    <string name="program_day_sob">Sobota</string>
-    <string name="program_day_nd">Niedziela</string>
+    <string name="program_day_1">Piątek</string>
+    <string name="program_day_2">Sobota</string>
+    <string name="program_day_3">Niedziela</string>
 
     <string name="program_otwarcie_imprezy">Otwarcie imprezy</string>
     <string name="program_taniec_indian">Pokaz tańców indiańskich</string>

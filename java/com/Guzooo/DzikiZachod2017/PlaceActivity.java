@@ -80,7 +80,7 @@ public class PlaceActivity extends Activity {
                         "PLACE = ?",
                         new String[]{Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                         null, null,
-                        "DAY, TIME_START");
+                        "DAY, TIME_START, NAME");
 
             } catch (SQLiteException e) {
                 Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();

@@ -82,17 +82,17 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
     }
 
     public void  onClickPiatek(View v){
-        ReadingDatabase(R.string.program_day_pt);
+        ReadingDatabase(R.string.program_day_1);
         ResetButtons((Button) v);
     }
 
     public void  onClickSobota(View v){
-        ReadingDatabase(R.string.program_day_sob);
+        ReadingDatabase(R.string.program_day_2);
         ResetButtons((Button) v);
     }
 
     public void  onClickNiedziela(View v){
-        ReadingDatabase(R.string.program_day_nd);
+        ReadingDatabase(R.string.program_day_3);
         ResetButtons((Button) v);
     }
 
@@ -135,8 +135,11 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        adapter.CloseCursor();
-        cursor.close();
-        db.close();
+
+        if(adapter != null) {
+            adapter.CloseCursor();
+            cursor.close();
+            db.close();
+        }
     }
 }

@@ -84,11 +84,11 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     return new ProgramFragment();
                 case 2:
-                    return new BiletyFragment();
-                case 3:
-                    return new GwiazdaFragment();
-                case 4:
                     return new SpolecznoscFragment();
+                case 3:
+                    return new BiletyFragment();
+                case 4:
+                    return new GwiazdaFragment();
                 case 5:
                     return new InfoFragment();
             }
@@ -108,11 +108,11 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 1:
                     return "" + getString(R.string.fragment_program_name);
                 case 2:
-                    return "" + getString(R.string.fragment_bilety_name);
-                case 3:
-                    return "" + getString(R.string.fragment_gwiazdy_szeryfa_name);
-                case 4:
                     return "" + getString(R.string.fragment_spolecznosc_name);
+                case 3:
+                    return "" + getString(R.string.fragment_bilety_name);
+                case 4:
+                    return "" + getString(R.string.fragment_gwiazdy_szeryfa_name);
                 case 5:
                     return "" + getString(R.string.fragment_info_name);
             }

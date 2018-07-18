@@ -35,16 +35,16 @@ public class ProgramHelper extends SQLiteOpenHelper {
                     + "IMAGE_RSC INTEGER, "
                     + "FAVORITE INTEGER,"
                     + "PLACE INTEGER)");
-            AddEvent(db,R.string.program_taniec_country, 990,1020,R.string.program_day_pt,R.string.program_opis_taniec_country,0,0,1);
-            AddEvent(db, R.string.program_otwarcie_imprezy,900, 960,R.string.program_day_pt,R.string.program_opis_otwarcie_imprezy,0,0,1);
-            AddEvent(db, R.string.program_taniec_indian,960,990,R.string.program_day_pt,R.string.program_opis_taniec_indian,0,0,1);
-            AddEvent(db,R.string.program_rozpoczencie_imprezy,600,630,R.string.program_day_sob,R.string.program_opis_rozpoczecie_imprezy_1,0,0,1);
-            AddEvent(db,R.string.program_taniec_indian,630,690,R.string.program_day_sob,R.string.program_opis_taniec_indian,0,0,1);
-            AddEvent(db,R.string.program_spektakl_dla_dzieci,660,780,R.string.program_day_sob,R.string.program_opis_spektakl_dla_dzieci,0,0,0);
-            AddEvent(db,R.string.program_rozpoczencie_imprezy,600,630,R.string.program_day_nd,R.string.program_opis_rozpoczecie_imprezy_2,0,0,1);
-            AddEvent(db,R.string.program_taniec_indian,630,660,R.string.program_day_nd,R.string.program_opis_taniec_indian,0,0,1);
-            AddEvent(db,R.string.program_fajerwerki,1320,1350,R.string.program_day_nd,R.string.program_opis_fajerwerki,0,0,0);
-            AddEvent(db,R.string.program_koniec,1380,0,R.string.program_day_nd,R.string.program_opis_koniec,0,0,1);
+            AddEvent(db,R.string.program_taniec_country, 990,1020,R.string.program_day_1,R.string.program_opis_taniec_country,0,0,1);
+            AddEvent(db, R.string.program_otwarcie_imprezy,900, 960,R.string.program_day_1,R.string.program_opis_otwarcie_imprezy,0,0,1);
+            AddEvent(db, R.string.program_taniec_indian,960,990,R.string.program_day_1,R.string.program_opis_taniec_indian,0,0,1);
+            AddEvent(db,R.string.program_rozpoczencie_imprezy,600,630,R.string.program_day_2,R.string.program_opis_rozpoczecie_imprezy_1,0,0,1);
+            AddEvent(db,R.string.program_taniec_indian,630,690,R.string.program_day_2,R.string.program_opis_taniec_indian,0,0,1);
+            AddEvent(db,R.string.program_spektakl_dla_dzieci,660,780,R.string.program_day_2,R.string.program_opis_spektakl_dla_dzieci,0,0,0);
+            AddEvent(db,R.string.program_rozpoczencie_imprezy,600,630,R.string.program_day_3,R.string.program_opis_rozpoczecie_imprezy_2,0,0,1);
+            AddEvent(db,R.string.program_taniec_indian,630,660,R.string.program_day_3,R.string.program_opis_taniec_indian,0,0,1);
+            AddEvent(db,R.string.program_fajerwerki,1320,1350,R.string.program_day_3,R.string.program_opis_fajerwerki,0,0,0);
+            AddEvent(db,R.string.program_koniec,1380,0,R.string.program_day_3,R.string.program_opis_koniec,0,0,1);
 
             db.execSQL("CREATE TABLE PLACES (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "NAME INTEGER,"

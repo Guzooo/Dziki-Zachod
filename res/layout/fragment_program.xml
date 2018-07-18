@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:theme="@style/ButtonNormal"
-            android:text="@string/program_day_pt"/>
+            android:text="@string/program_day_1"/>
 
         <Button
             android:id="@+id/button_sob"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:theme="@style/ButtonNormal"
-            android:text="@string/program_day_sob" />
+            android:text="@string/program_day_2" />
 
         <Button
             android:id="@+id/button_nd"
@@ -41,6 +41,6 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:theme="@style/ButtonNormal"
-            android:text="@string/program_day_nd" />
+            android:text="@string/program_day_3" />
     </LinearLayout>
 </LinearLayout>
