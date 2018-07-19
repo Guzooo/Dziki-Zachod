@@ -9,8 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,13 +21,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/wydarzenie_time"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/wydarzenie_description"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"/>
 
             <CheckBox
                 android:id="@+id/wydarzenie_favorite"
@@ -57,6 +59,7 @@
 
         <!-- TODO: Theme buttonów ogarnąć dla M-->
         <Button
+            android:id="@+id/wydarzenie_btn_inne_wyd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -64,6 +67,7 @@
             android:onClick="onClickInneWydarzenia" />
 
         <Button
+            android:id="@+id/wydarzenie_btn_inne_god"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

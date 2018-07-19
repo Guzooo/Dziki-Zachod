@@ -55,11 +55,11 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
         if(cursor == null) {
             if (title.equals(getString(R.string.program_day_1))){
-                onClick(btnPiatek);
+                btnPiatek.callOnClick();
             } else if (title.equals(getString(R.string.program_day_2))){
-                onClick(btnSobota);
+                btnSobota.callOnClick();
             } else if (title.equals(getString(R.string.program_day_3))){
-                onClick(btnNiedziela);
+                btnNiedziela.callOnClick();
             }
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());

@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 public class WydarzenieActivity extends Activity {
 
     public static final String EXTRA_ID = "id";
+    public static final String BUNDLE_BTN_NUM = "btnnum";
 
     private int name;
     private int timeStart;
@@ -31,6 +33,9 @@ public class WydarzenieActivity extends Activity {
     private SQLiteDatabase db;
     private Cursor cursor;
     private ProgramCardAdapter adapter;
+
+    private Button btnOld;
+    private int btnOn = 0;
 
     //TODO: mozliwosc wielokrotnego otwierania nastepnych wydarzen cofanie ich trojkatem, a trzalka u gory mozliwosc powrotu do glownego activity
     //TODO: wyswietlanie komunikatu BRAK
@@ -92,7 +97,23 @@ public class WydarzenieActivity extends Activity {
 
         checkFavorite.setChecked(favorite);
 
-        onClickInneWydarzenia(null);
+        if(savedInstanceState != null){
+            btnOn = savedInstanceState.getInt(BUNDLE_BTN_NUM);
+        } else if (btnOn == 0){
+            btnOn = 1;
+        }
+
+        Button btn;
+        switch (btnOn){
+            case 1:
+                btn = findViewById(R.id.wydarzenie_btn_inne_wyd);
+                btn.callOnClick();
+                break;
+            case 2:
+                btn = findViewById(R.id.wydarzenie_btn_inne_god);
+                btn.callOnClick();
+                break;
+        }
     }
 
     public void onClickFavorite(View v){
@@ -115,6 +136,9 @@ public class WydarzenieActivity extends Activity {
     }
 
     public void onClickInneWydarzenia(View v){
+        MarkBtn((Button) v);
+        btnOn = 1;
+
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             db = openHelper.getReadableDatabase();
@@ -144,6 +168,9 @@ public class WydarzenieActivity extends Activity {
     }
 
     public void onClickInneGodziny(View v){
+        MarkBtn((Button) v);
+        btnOn = 2;
+
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             db = openHelper.getReadableDatabase();
@@ -170,6 +197,21 @@ public class WydarzenieActivity extends Activity {
         }catch (SQLiteException e){
             Toast.makeText(this, "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void MarkBtn(Button b){
+        if(btnOld != null){
+            btnOld.setTextColor(b.getTextColors());
+        }
+        b.setTextColor(getResources().getColor(R.color.pressedText));
+        btnOld = b;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(BUNDLE_BTN_NUM, btnOn);
     }
 
     @Override

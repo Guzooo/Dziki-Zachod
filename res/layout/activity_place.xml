@@ -21,20 +21,30 @@
                 android:id="@+id/place_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:id="@+id/place_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"/>
 
             <CheckBox
                 android:id="@+id/place_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/check_box_favorite"/>
+                android:text="@string/check_box_favorite"
+                android:layout_marginBottom="8dp"/>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/place_wydarzenia"
+                android:theme="@style/TextTitle"
+                android:layout_marginLeft="8dp"/>
         </LinearLayout>
 
         <ImageView
@@ -44,11 +54,7 @@
             android:src="@mipmap/ic_launcher_round"/>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/place_wydarzenia"
-        android:theme="@style/TextTitle"/>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/place_recycler"
