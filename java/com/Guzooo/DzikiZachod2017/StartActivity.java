@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -39,6 +38,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
+                actionBar.setTitle(sectionsPagerAdapter.SetActionBarTitle(position));
             }
 
             @Override
@@ -104,19 +104,30 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
         public CharSequence getPageTitle(int position){
             switch (position){
                 case 0:
-                    return "" + getString(R.string.fragment_home_name);
+                    return getString(R.string.fragment_home_name);
                 case 1:
-                    return "" + getString(R.string.fragment_program_name);
+                    return getString(R.string.fragment_program_name);
                 case 2:
-                    return "" + getString(R.string.fragment_spolecznosc_name);
+                    return getString(R.string.fragment_spolecznosc_name);
                 case 3:
-                    return "" + getString(R.string.fragment_bilety_name);
+                    return getString(R.string.fragment_bilety_name);
                 case 4:
-                    return "" + getString(R.string.fragment_gwiazdy_szeryfa_name);
+                    return getString(R.string.fragment_gwiazdy_szeryfa_name);
                 case 5:
-                    return "" + getString(R.string.fragment_info_name);
+                    return getString(R.string.fragment_info_name);
             }
             return null;
+        }
+
+        public String SetActionBarTitle(int position){
+            switch (position){
+                case 2:
+                    return getString(R.string.spolecznosc_hasztag);
+                case 5:
+                    return getString(R.string.app_G);
+            }
+            return getString(R.string.app_name);
+
         }
     }
 

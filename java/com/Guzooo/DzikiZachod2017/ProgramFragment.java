@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 public class ProgramFragment extends Fragment implements View.OnClickListener {
 
+    private static final String BUNDLE_DAY = "day";
+
     private RecyclerView programRecycle;
     private ProgramCardAdapter adapter;
 
@@ -24,6 +26,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
     private Cursor cursor;
 
     private Button btnOld;
+    private String title;
 
     public ProgramFragment() {
         // Required empty public constructor
@@ -44,8 +47,20 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
         programRecycle = layout.findViewById(R.id.program_recycle);
 
+        if(savedInstanceState != null){
+            title = savedInstanceState.getString(BUNDLE_DAY);
+        } else if (title == null){
+            title = getString(R.string.program_day_1);
+        }
+
         if(cursor == null) {
-            onClickPiatek(btnPiatek);
+            if (title.equals(getString(R.string.program_day_1))){
+                onClick(btnPiatek);
+            } else if (title.equals(getString(R.string.program_day_2))){
+                onClick(btnSobota);
+            } else if (title.equals(getString(R.string.program_day_3))){
+                onClick(btnNiedziela);
+            }
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
@@ -61,8 +76,15 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
-            btnOld.setTextColor(getResources().getColor(R.color.pressedText));
+            if (title.equals(getString(R.string.program_day_1))){
+                MarkDay(btnPiatek);
+            } else if (title.equals(getString(R.string.program_day_2))){
+                MarkDay(btnSobota);
+            } else if (title.equals(getString(R.string.program_day_3))){
+                MarkDay(btnNiedziela);
+            }
         }
+
         return layout;
     }
 
@@ -81,22 +103,25 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void  onClickPiatek(View v){
+    public void onClickPiatek(View v){
         ReadingDatabase(R.string.program_day_1);
-        ResetButtons((Button) v);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_1);
     }
 
-    public void  onClickSobota(View v){
+    public void onClickSobota(View v){
         ReadingDatabase(R.string.program_day_2);
-        ResetButtons((Button) v);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_2);
     }
 
-    public void  onClickNiedziela(View v){
+    public void onClickNiedziela(View v){
         ReadingDatabase(R.string.program_day_3);
-        ResetButtons((Button) v);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_3);
     }
 
-    private void ResetButtons(Button b){
+    private void MarkDay(Button b){
         if(btnOld != null){
             btnOld.setTextColor(b.getTextColors());
         }
@@ -130,6 +155,13 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         }catch (SQLiteException e){
             Toast.makeText(getActivity(), "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(BUNDLE_DAY, title);
     }
 
     @Override

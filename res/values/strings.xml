@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Dziki Zachód 2018</string>
+    <string name="app_G">© Guzooo 2018</string>
     <string name="fragment_home_name">Strona Główna</string>
     <string name="fragment_mapa_name">Mapa</string>
     <string name="fragment_program_name">Program</string>
@@ -58,4 +59,6 @@
 
     <string name="mapa_other_title_tur">Tury</string>
     <string name="mapa_other_title_strus">Struś</string>
+
+    <string name="spolecznosc_hasztag">#DzikiZachód2018</string>
 </resources>
