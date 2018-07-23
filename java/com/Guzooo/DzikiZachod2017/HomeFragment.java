@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +50,7 @@ public class HomeFragment extends Fragment {
                     "DAY, TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             eventsFavorite.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, layout.findViewById(R.id.home_events_favorite_null));
             eventsFavorite.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
                 }
             });
         } catch (SQLiteException e) {
-            Toast.makeText(getActivity(), "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
     }
 

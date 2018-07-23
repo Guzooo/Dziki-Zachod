@@ -103,7 +103,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     db.close();
                 }
             } catch (SQLiteException e) {
-                Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
             }
         } else {
             for (int i = 0; i < list.size(); i++){
@@ -140,7 +140,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                     db.close();
                 }
             } catch (SQLiteException e) {
-                Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
             }
         } else {
             for (int i = 0; i < list.size(); i++){

@@ -33,6 +33,8 @@ public class WydarzenieActivity extends Activity {
     private SQLiteDatabase db;
     private Cursor cursor;
     private ProgramCardAdapter adapter;
+    private View nullCard;
+    private TextView nullCardText;
 
     private Button btnOld;
     private int btnOn = 0;
@@ -47,6 +49,8 @@ public class WydarzenieActivity extends Activity {
         TextView txtTime = findViewById(R.id.wydarzenie_time);
         TextView txtDescription = findViewById(R.id.wydarzenie_description);
         CheckBox checkFavorite = findViewById(R.id.wydarzenie_favorite);
+        nullCard = findViewById(R.id.wydarzenie_null);
+        nullCardText = findViewById(R.id.wydarzenie_null_text);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -71,7 +75,7 @@ public class WydarzenieActivity extends Activity {
             cursor.close();
             db.close();
         } catch (SQLiteException e) {
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
 
         getActionBar().setTitle(getString(name));
@@ -131,13 +135,14 @@ public class WydarzenieActivity extends Activity {
                     new String[] {Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))});
             db.close();
         } catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onClickInneWydarzenia(View v){
         MarkBtn((Button) v);
         btnOn = 1;
+        nullCardText.setText(R.string.wydarzenie_ten_czas_null);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -151,7 +156,7 @@ public class WydarzenieActivity extends Activity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             recyclerView.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -163,13 +168,14 @@ public class WydarzenieActivity extends Activity {
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onClickInneGodziny(View v){
         MarkBtn((Button) v);
         btnOn = 2;
+        nullCardText.setText(R.string.wydarzenie_te_same_null);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -183,7 +189,7 @@ public class WydarzenieActivity extends Activity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             recyclerView.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -195,7 +201,7 @@ public class WydarzenieActivity extends Activity {
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
     }
 

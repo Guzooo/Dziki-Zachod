@@ -63,7 +63,7 @@ public class PlaceActivity extends Activity {
             cursor.close();
             db.close();
         } catch (SQLiteException e) {
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
 
         getActionBar().setTitle(getString(name));
@@ -83,14 +83,14 @@ public class PlaceActivity extends Activity {
                         "DAY, TIME_START, NAME");
 
             } catch (SQLiteException e) {
-                Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
             }
         }
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         RecyclerView recyclerView = findViewById(R.id.place_recycler);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ProgramCardAdapter(cursor);
+        adapter = new ProgramCardAdapter(cursor, findViewById(R.id.place_null));
         recyclerView.setAdapter(adapter);
 
         adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -118,7 +118,7 @@ public class PlaceActivity extends Activity {
                     new String[] {Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))});
             db.close();
         }catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
     }
 

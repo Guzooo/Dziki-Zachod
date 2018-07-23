@@ -21,6 +21,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView programRecycle;
     private ProgramCardAdapter adapter;
+    private View nullCard;
 
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -46,6 +47,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         btnNiedziela.setOnClickListener(this);
 
         programRecycle = layout.findViewById(R.id.program_recycle);
+        nullCard = layout.findViewById(R.id.program_null);
 
         if(savedInstanceState != null){
             title = savedInstanceState.getString(BUNDLE_DAY);
@@ -64,7 +66,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             programRecycle.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -141,7 +143,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                     "TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             programRecycle.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -153,7 +155,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(getActivity(), "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
     }
 
