@@ -32,7 +32,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
-    //TODO: Tytuł dnia zamiast nazwy aplikacji
+    //TODO: otwiera dzisiejszy dzien
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_program, container, false);

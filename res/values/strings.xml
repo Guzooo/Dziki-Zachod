@@ -9,6 +9,11 @@
     <string name="fragment_spolecznosc_name">Społeczność</string>
     <string name="fragment_info_name">Informacje</string>
 
+    <string name="menu_facebook_palac">Facebook Pałacu</string>
+    <string name="menu_facebook_guzooo">Facebook Guzooo</string>
+    <string name="menu_instagram_palac">Instagram Pałacu</string>
+    <string name="menu_otworz_link">Otwórz stronę w przeglądarce lub aplikacji</string>
+
     <string name="program_day_1">Piątek</string>
     <string name="program_day_2">Sobota</string>
     <string name="program_day_3">Niedziela</string>
