@@ -1,13 +1,19 @@
 package com.Guzooo.DzikiZachod2017;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,26 +34,59 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private ArrayList<Marker> typeEat = new ArrayList<>();
     private ArrayList<Marker> typeOther = new ArrayList<>();
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-        // TODO: Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        drawerLayout = findViewById(R.id.map_drawer);
+
+        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout,R.string.szuflada_open,R.string.szuflada_close){
+            @Override
+            public void onDrawerClosed(View view){
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu();
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView){
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu();
+            }
+        };
+        drawerLayout.addDrawerListener(drawerToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
 
-    /**
-     * TODO: Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -75,13 +114,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        createPlece(R.string.mapa_type_other, typeOther);
-        createPlece(R.string.mapa_type_eat, typeEat);
+        showPlaceWithDetails(R.string.mapa_type_other, typeOther, 0);
+        showPlaceWithDetails(R.string.mapa_type_eat, typeEat, R.id.map_check_eat);
 
-        showPlaceOther(R.string.mapa_type_zoo, typeZoo);
+        showPlace(R.string.mapa_type_zoo, typeZoo, R.id.map_check_zoo);
     }
 
-    private void createPlece (int type, ArrayList<Marker> list) {
+    private void showPlaceWithDetails(int type, ArrayList<Marker> list, int viewId) {
         if(list.isEmpty()) {
             try {
                 SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -105,16 +144,18 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             } catch (SQLiteException e) {
                 Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
             }
-        } else {
-            for (int i = 0; i < list.size(); i++){
-                mMap.addMarker(new MarkerOptions()
-                                .position(list.get(i).getPosition())
-                                .snippet(list.get(i).getSnippet()));
+        }
+
+        if(viewId != 0) {
+            CheckBox checkBox = findViewById(viewId);
+
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setVisible(checkBox.isChecked());
             }
         }
     }
 
-    private void showPlaceOther(int type, ArrayList<Marker> list){
+    private void showPlace(int type, ArrayList<Marker> list, int viewId){
         if(list.isEmpty()) {
             try {
                 SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -142,13 +183,33 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             } catch (SQLiteException e) {
                 Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
             }
-        } else {
-            for (int i = 0; i < list.size(); i++){
-                mMap.addMarker(new MarkerOptions()
-                        .position(list.get(i).getPosition())
-                        .title(list.get(i).getTitle())
-                        .snippet(list.get(i).getSnippet()));
+        }
+
+        if(viewId != 0) {
+            CheckBox checkBox = findViewById(viewId);
+
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).setVisible(checkBox.isChecked());
             }
         }
+    }
+
+    public void onClickCategory (View v){
+        CheckBox checkBox = (CheckBox) v;
+
+        switch (v.getId()){
+            case R.id.map_check_zoo:
+                showPlace(R.string.mapa_type_zoo, typeZoo, v.getId());
+                break;
+            case R.id.map_check_eat:
+                showPlaceWithDetails(R.string.mapa_type_eat, typeEat, v.getId());
+                break;
+        }
+    }
+
+    public void onClickMapaGoogle(View view){
+        Uri uri = Uri.parse("https://www.google.pl/maps/dir//Parking,+Kurozw%C4%99ki/@50.5944718,21.0619917,11802m/data=!3m1!1e3!4m9!4m8!1m0!1m5!1m1!1s0x4717e332b7cb3a21:0xe37cffbd88ac840b!2m2!1d21.097011!2d50.594477!3e0");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }

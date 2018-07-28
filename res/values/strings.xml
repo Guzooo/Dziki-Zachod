@@ -17,6 +17,9 @@
     <string name="error_read_database">Baza danych jest niedostępna</string>
     <string name="error_read_database_on_program">Błąd bazy danych\nSpróbuj wyczyścić pamięć podęczną lub dane aplikacji\n\nUstawienia > Aplikacje > Dziki Zachód 2018 > Pamięć wewnętrzna</string>
 
+    <string name="szuflada_open">Otwórz szufladę</string>
+    <string name="szuflada_close">Zamknij szufladę</string>
+
     <string name="program_day_1">Piątek</string>
     <string name="program_day_2">Sobota</string>
     <string name="program_day_3">Niedziela</string>
@@ -61,6 +64,12 @@
     <string name="mapa_type_zoo">Zwierzyniec</string>
     <string name="mapa_type_eat">Żywność</string>
     <string name="mapa_type_other">inne</string>
+
+    <string-array name="mapa_types">
+        <item>@string/mapa_type_zoo</item>
+        <item>@string/mapa_type_eat</item>
+        <item>@string/mapa_type_other</item>
+    </string-array>
 
     <string name="mapa_title_scena">Scena</string>
     <string name="mapa_title_pizza">Pizzeria Ancona</string>
