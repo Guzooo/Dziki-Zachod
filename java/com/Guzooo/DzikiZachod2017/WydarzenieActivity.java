@@ -1,6 +1,5 @@
 package com.Guzooo.DzikiZachod2017;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,15 +7,28 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WydarzenieActivity extends Activity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCallback{
 
     public static final String EXTRA_ID = "id";
     public static final String BUNDLE_BTN_NUM = "btnnum";
@@ -30,6 +42,9 @@ public class WydarzenieActivity extends Activity {
     private boolean favorite;
     private int place;
 
+    private float Y;
+    private float X;
+
     private SQLiteDatabase db;
     private Cursor cursor;
     private ProgramCardAdapter adapter;
@@ -39,8 +54,21 @@ public class WydarzenieActivity extends Activity {
     private Button btnOld;
     private int btnOn = 0;
 
-    //TODO: mozliwosc wielokrotnego otwierania nastepnych wydarzen cofanie ich trojkatem, a trzalka u gory mozliwosc powrotu do glownego activity
-    //TODO: wyswietlanie komunikatu BRAK
+    private class onClickListener implements MapView.OnClickListener, GoogleMap.OnMapClickListener {
+        @Override
+        public void onClick(View v){}
+
+        @Override
+        public void onMapClick(LatLng latLng) {
+            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+            intent.putExtra(MapActivity.EXTRA_Y, Y);
+            intent.putExtra(MapActivity.EXTRA_X, X);
+            intent.putExtra(MapActivity.EXTRA_ZOOM, 19);
+            Log.d("Wyda", Y + " " + X );
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +100,24 @@ public class WydarzenieActivity extends Activity {
                 place = cursor.getInt(7);
             }
 
+            cursor = db.query("PLACES",
+                    new String[]{"Y", "X"},
+                    "_id = ?",
+                    new String[]{Integer.toString(place)},
+                    null,null,null);
+
+            if(cursor.moveToFirst()){
+                Y = cursor.getFloat(0);
+                X = cursor.getFloat(1);
+            }
+
             cursor.close();
             db.close();
         } catch (SQLiteException e) {
             Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         getActionBar().setTitle(getString(name));
 
@@ -118,6 +159,10 @@ public class WydarzenieActivity extends Activity {
                 btn.callOnClick();
                 break;
         }
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.wydarzenie_map);
+        mapFragment.getMapAsync(this);
     }
 
     public void onClickFavorite(View v){
@@ -221,10 +266,48 @@ public class WydarzenieActivity extends Activity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         adapter.CloseCursor();
         cursor.close();
         db.close();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        googleMap.setOnMapClickListener(new onClickListener());
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Y, X)));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+        googleMap.setMapType(googleMap.MAP_TYPE_SATELLITE);
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
+        googleMap.getUiSettings().setAllGesturesEnabled(false);
+
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                new onClickListener().onMapClick(null);
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
+            }
+        });
+
+        googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Y, X)));
     }
 }

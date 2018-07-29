@@ -8,8 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -66,6 +68,7 @@ public class PlaceActivity extends Activity {
             Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle(getString(name));
         txtType.setText(getString(type));
         txtDescription.setText(getString(description));
@@ -120,6 +123,16 @@ public class PlaceActivity extends Activity {
         }catch (SQLiteException e){
             Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

@@ -21,12 +21,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    public static final String EXTRA_Y = "y";
+    public static final String EXTRA_X = "x";
+    public static final String EXTRA_ZOOM = "zoom";
 
     private GoogleMap mMap;
 
@@ -91,9 +96,13 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng (50.596184, 21.099909)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(getIntent().getFloatExtra(EXTRA_Y, 50.596184f), getIntent().getFloatExtra(EXTRA_X, 21.099909f))));
+        mMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(50.593606, 21.096510), new LatLng(50.598854, 21.103208)));
+
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(getIntent().getIntExtra(EXTRA_ZOOM,17)));
         mMap.setMaxZoomPreference(20);
-        mMap.setMinZoomPreference(17);
+        mMap.setMinZoomPreference(16);
+
         mMap.setMapType(googleMap.MAP_TYPE_SATELLITE);
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
