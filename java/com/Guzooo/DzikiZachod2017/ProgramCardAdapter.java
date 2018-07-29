@@ -94,8 +94,8 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
     }
 
     public void CloseCursor(){
-        if(this.cursor != null){
-            this.cursor.close();
+        if(cursor != null){
+            cursor.close();
         }
     }
 }

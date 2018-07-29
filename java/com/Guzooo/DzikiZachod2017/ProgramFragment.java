@@ -30,7 +30,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
     private String title;
 
     public ProgramFragment() {
-        // Required empty public constructor
+
     }
 
     //TODO: otwiera dzisiejszy dzien
