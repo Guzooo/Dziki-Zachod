@@ -80,14 +80,22 @@ public class ProgramCardAdapter extends RecyclerView.Adapter<ProgramCardAdapter.
         return cursor.getCount();
     }
 
-    public ProgramCardAdapter(Cursor cursor){
+    public ProgramCardAdapter(Cursor cursor, View nullCard){
         CloseCursor();
         this.cursor = cursor;
+
+        if(nullCard != null) {
+            if (cursor.getCount() == 0) {
+                nullCard.setVisibility(View.VISIBLE);
+            } else {
+                nullCard.setVisibility(View.GONE);
+            }
+        }
     }
 
     public void CloseCursor(){
-        if(this.cursor != null){
-            this.cursor.close();
+        if(cursor != null){
+            cursor.close();
         }
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_hasztag"
+        android:icon="@drawable/hasztag"
+        android:orderInCategory="99"
+        android:title="@string/spolecznosc_hasztag" />
+
+    <item
+        android:id="@id/action_map"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:orderInCategory="100"
+        android:title="@string/fragment_mapa_name"/>
+
+    <item
+        android:id="@+id/action_open_przegladarka"
+        android:orderInCategory="101"
+        android:title="@string/menu_otworz_link"/>
+
+    <item
+        android:id="@+id/action_instagram_palac"
+        android:orderInCategory="102"
+        android:title="@string/menu_instagram_palac"/>
+
+    <item
+        android:id="@+id/action_facebook_palac"
+        android:orderInCategory="103"
+        android:title="@string/menu_facebook_palac"/>
+
+    <item
+        android:id="@+id/action_facebook_guzooo"
+        android:orderInCategory="104"
+        android:title="@string/menu_facebook_guzooo"/>
+</menu>

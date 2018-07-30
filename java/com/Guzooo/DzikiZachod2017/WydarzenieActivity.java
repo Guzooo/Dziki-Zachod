@@ -1,23 +1,37 @@
 package com.Guzooo.DzikiZachod2017;
 
-import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WydarzenieActivity extends Activity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCallback{
 
     public static final String EXTRA_ID = "id";
+    public static final String BUNDLE_BTN_NUM = "btnnum";
 
     private int name;
     private int timeStart;
@@ -26,28 +40,51 @@ public class WydarzenieActivity extends Activity {
     private int description;
     private int imageRSC;
     private boolean favorite;
+    private int place;
+
+    private float Y;
+    private float X;
 
     private SQLiteDatabase db;
     private Cursor cursor;
     private ProgramCardAdapter adapter;
+    private View nullCard;
+    private TextView nullCardText;
 
-    //TODO: mozliwosc wielokrotnego otwierania nastepnych wydarzen cofanie ich trojkatem, a trzalka u gory mozliwosc powrotu do glownego activity
-    //TODO: wyswietlanie komunikatu BRAK
+    private Button btnOld;
+    private int btnOn = 0;
+
+    private class onClickListener implements MapView.OnClickListener, GoogleMap.OnMapClickListener {
+        @Override
+        public void onClick(View v){}
+
+        @Override
+        public void onMapClick(LatLng latLng) {
+            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+            intent.putExtra(MapActivity.EXTRA_Y, Y);
+            intent.putExtra(MapActivity.EXTRA_X, X);
+            intent.putExtra(MapActivity.EXTRA_ZOOM, 19);
+            Log.d("Wyda", Y + " " + X );
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Wydarzenie","Dzień Dobry");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wydarzenie);
 
         TextView txtTime = findViewById(R.id.wydarzenie_time);
         TextView txtDescription = findViewById(R.id.wydarzenie_description);
-        CheckBox Checkfavorite = findViewById(R.id.wydarzenie_favorite);
+        CheckBox checkFavorite = findViewById(R.id.wydarzenie_favorite);
+        nullCard = findViewById(R.id.wydarzenie_null);
+        nullCardText = findViewById(R.id.wydarzenie_null_text);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             SQLiteDatabase db = openHelper.getReadableDatabase();
             Cursor cursor = db.query("EVENTS",
-                    new String[]{"NAME", "TIME_START", "TIME_END", "DAY", "DESCRIPTION", "IMAGE_RSC", "FAVORITE"},
+                    new String[]{"NAME", "TIME_START", "TIME_END", "DAY", "DESCRIPTION", "IMAGE_RSC", "FAVORITE", "PLACE"},
                     "_id = ?",
                     new String[]{Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null, null);
@@ -60,13 +97,27 @@ public class WydarzenieActivity extends Activity {
                 description = cursor.getInt(4);
                 imageRSC = cursor.getInt(5);
                 favorite = (cursor.getInt(6) == 1);
+                place = cursor.getInt(7);
+            }
+
+            cursor = db.query("PLACES",
+                    new String[]{"Y", "X"},
+                    "_id = ?",
+                    new String[]{Integer.toString(place)},
+                    null,null,null);
+
+            if(cursor.moveToFirst()){
+                Y = cursor.getFloat(0);
+                X = cursor.getFloat(1);
             }
 
             cursor.close();
             db.close();
         } catch (SQLiteException e) {
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         getActionBar().setTitle(getString(name));
 
@@ -89,9 +140,29 @@ public class WydarzenieActivity extends Activity {
 
         txtDescription.setText(getString(description));
 
-        Checkfavorite.setChecked(favorite);
+        checkFavorite.setChecked(favorite);
 
-        onClickInneWydarzenia(null);
+        if(savedInstanceState != null){
+            btnOn = savedInstanceState.getInt(BUNDLE_BTN_NUM);
+        } else if (btnOn == 0){
+            btnOn = 1;
+        }
+
+        Button btn;
+        switch (btnOn){
+            case 1:
+                btn = findViewById(R.id.wydarzenie_btn_inne_wyd);
+                btn.callOnClick();
+                break;
+            case 2:
+                btn = findViewById(R.id.wydarzenie_btn_inne_god);
+                btn.callOnClick();
+                break;
+        }
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.wydarzenie_map);
+        mapFragment.getMapAsync(this);
     }
 
     public void onClickFavorite(View v){
@@ -109,11 +180,15 @@ public class WydarzenieActivity extends Activity {
                     new String[] {Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))});
             db.close();
         } catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onClickInneWydarzenia(View v){
+        MarkBtn((Button) v);
+        btnOn = 1;
+        nullCardText.setText(R.string.wydarzenie_ten_czas_null);
+
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             db = openHelper.getReadableDatabase();
@@ -126,43 +201,78 @@ public class WydarzenieActivity extends Activity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             recyclerView.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
                 @Override
                 public void onClick(int id) {
+                    Intent intent = new Intent(getApplicationContext(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    startActivity(intent);
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
     }
 
     public void onClickInneGodziny(View v){
+        MarkBtn((Button) v);
+        btnOn = 2;
+        nullCardText.setText(R.string.wydarzenie_te_same_null);
+
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
             db = openHelper.getReadableDatabase();
             cursor = db.query("EVENTS",
                     new String[]{"_id", "DAY", "TIME_START", "TIME_END"},
-                    "NAME = ? AND _id != ? AND (DAY = ? OR DAY = ? OR DAY = ?)",
-                    new String[] {Integer.toString(name),Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0)), Integer.toString(R.string.program_day_pt), Integer.toString(R.string.program_day_sob), Integer.toString(R.string.program_day_nd)},
+                    "NAME = ? AND _id != ?",
+                    new String[] {Integer.toString(name),Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null,
-                    null);
+                    "DAY, TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             recyclerView.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
                 @Override
                 public void onClick(int id) {
+                    Intent intent = new Intent(getApplicationContext(), WydarzenieActivity.class);
+                    intent.putExtra(WydarzenieActivity.EXTRA_ID, id);
+                    startActivity(intent);
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(this, "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void MarkBtn(Button b){
+        if(btnOld != null){
+            btnOld.setTextColor(b.getTextColors());
+        }
+        b.setTextColor(getResources().getColor(R.color.pressedText));
+        btnOld = b;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(BUNDLE_BTN_NUM, btnOn);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -171,5 +281,33 @@ public class WydarzenieActivity extends Activity {
         adapter.CloseCursor();
         cursor.close();
         db.close();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        googleMap.setOnMapClickListener(new onClickListener());
+
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Y, X)));
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+        googleMap.setMapType(googleMap.MAP_TYPE_SATELLITE);
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
+        googleMap.getUiSettings().setAllGesturesEnabled(false);
+
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                new onClickListener().onMapClick(null);
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                return null;
+            }
+        });
+
+        googleMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Y, X)));
     }
 }

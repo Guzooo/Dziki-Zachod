@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
@@ -35,8 +34,8 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
         RecyclerView eventsFavorite = layout.findViewById(R.id.home_events_favorite_recycler);
 
@@ -45,12 +44,13 @@ public class HomeFragment extends Fragment {
             db = openHelper.getReadableDatabase();
             cursor = db.query("EVENTS",
                     new String[]{"_id", "NAME", "TIME_START", "TIME_END", "DAY"},
-                    "FAVORITE = ? AND (DAY = ? OR DAY = ? OR DAY = ?)",
-                    new String[]{Integer.toString(1), Integer.toString(R.string.program_day_pt), Integer.toString(R.string.program_day_sob), Integer.toString(R.string.program_day_nd)},
-                    null, null, null);
+                    "FAVORITE = ?",
+                    new String[]{Integer.toString(1)},
+                    null, null,
+                    "DAY, TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             eventsFavorite.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, layout.findViewById(R.id.home_events_favorite_null));
             eventsFavorite.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -62,14 +62,13 @@ public class HomeFragment extends Fragment {
                 }
             });
         } catch (SQLiteException e) {
-            Toast.makeText(getActivity(), "Baza danych jest niedostępna", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
-        Log.d("HOME",cursor.getColumnCount()+"");
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         adapter.CloseCursor();
         cursor.close();
         db.close();

@@ -1,14 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".GwiazdaFragment">
 
-    <!-- TODO: Poczytać odnośnie QR w androidzie -->
     <TextView
+        android:id="@+id/gwia1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Zbieranie gwiazd szeryfa, przydzielane po zeskanowaniu kodu QR.\n\n-porozrucane kody można by szukać na terenie\n-jak aktywności można tworzyć w unity to mam pomysł na małą grę w której też będzie się zbierać te gwiazdki\n-drukowane wraz z paragonem (mało prawdopodobne że to ogarnę na ten rok)\n\nZa odpowiednią ilość gwiazdek można wziąść udział w losowaniu" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Wpisuj kody, które znajdziesz na terenie pałacu"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/gwia2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gwia1"/>
+    <TextView
+        android:id="@+id/gwia4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Musisz znaleźć 3 kody"
+        app:layout_constraintTop_toBottomOf="@id/gwia2"/>
+    <Button
+        android:id="@+id/gwia3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Sprawdź kod"/>
+
+</android.support.constraint.ConstraintLayout>

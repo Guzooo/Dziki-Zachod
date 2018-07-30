@@ -17,19 +17,23 @@ import android.widget.Toast;
 
 public class ProgramFragment extends Fragment implements View.OnClickListener {
 
+    private static final String BUNDLE_DAY = "day";
+
     private RecyclerView programRecycle;
     private ProgramCardAdapter adapter;
+    private View nullCard;
 
     private SQLiteDatabase db;
     private Cursor cursor;
 
     private Button btnOld;
+    private String title;
 
     public ProgramFragment() {
-        // Required empty public constructor
+
     }
 
-    //TODO: Tytuł dnia zamiast nazwy aplikacji
+    //TODO: otwiera dzisiejszy dzien
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_program, container, false);
@@ -43,13 +47,26 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         btnNiedziela.setOnClickListener(this);
 
         programRecycle = layout.findViewById(R.id.program_recycle);
+        nullCard = layout.findViewById(R.id.program_null);
+
+        if(savedInstanceState != null){
+            title = savedInstanceState.getString(BUNDLE_DAY);
+        } else if (title == null){
+            title = getString(R.string.program_day_1);
+        }
 
         if(cursor == null) {
-            onClickPiatek(btnPiatek);
+            if (title.equals(getString(R.string.program_day_1))){
+                btnPiatek.callOnClick();
+            } else if (title.equals(getString(R.string.program_day_2))){
+                btnSobota.callOnClick();
+            } else if (title.equals(getString(R.string.program_day_3))){
+                btnNiedziela.callOnClick();
+            }
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             programRecycle.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -61,8 +78,15 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                 }
             });
 
-            btnOld.setTextColor(getResources().getColor(R.color.pressedText));
+            if (title.equals(getString(R.string.program_day_1))){
+                MarkDay(btnPiatek);
+            } else if (title.equals(getString(R.string.program_day_2))){
+                MarkDay(btnSobota);
+            } else if (title.equals(getString(R.string.program_day_3))){
+                MarkDay(btnNiedziela);
+            }
         }
+
         return layout;
     }
 
@@ -81,22 +105,25 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void  onClickPiatek(View v){
-        ReadingDatabase(R.string.program_day_pt);
-        ResetButtons((Button) v);
+    public void onClickPiatek(View v){
+        ReadingDatabase(R.string.program_day_1);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_1);
     }
 
-    public void  onClickSobota(View v){
-        ReadingDatabase(R.string.program_day_sob);
-        ResetButtons((Button) v);
+    public void onClickSobota(View v){
+        ReadingDatabase(R.string.program_day_2);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_2);
     }
 
-    public void  onClickNiedziela(View v){
-        ReadingDatabase(R.string.program_day_nd);
-        ResetButtons((Button) v);
+    public void onClickNiedziela(View v){
+        ReadingDatabase(R.string.program_day_3);
+        MarkDay((Button) v);
+        title = getString(R.string.program_day_3);
     }
 
-    private void ResetButtons(Button b){
+    private void MarkDay(Button b){
         if(btnOld != null){
             btnOld.setTextColor(b.getTextColors());
         }
@@ -116,7 +143,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                     "TIME_START, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
-            adapter = new ProgramCardAdapter(cursor);
+            adapter = new ProgramCardAdapter(cursor, nullCard);
             programRecycle.setAdapter(adapter);
 
             adapter.setListener(new ProgramCardAdapter.Listener() {
@@ -128,15 +155,25 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                 }
             });
         }catch (SQLiteException e){
-            Toast.makeText(getActivity(), "Baza danych jest niedostępna",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), R.string.error_read_database,Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(BUNDLE_DAY, title);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        adapter.CloseCursor();
-        cursor.close();
-        db.close();
+
+        if(adapter != null) {
+            adapter.CloseCursor();
+            cursor.close();
+            db.close();
+        }
     }
 }

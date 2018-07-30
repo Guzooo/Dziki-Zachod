@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Dziki Zachód 2018</string>
+    <string name="app_G">© Guzooo 2018</string>
     <string name="fragment_home_name">Strona Główna</string>
     <string name="fragment_mapa_name">Mapa</string>
     <string name="fragment_program_name">Program</string>
@@ -8,9 +9,20 @@
     <string name="fragment_spolecznosc_name">Społeczność</string>
     <string name="fragment_info_name">Informacje</string>
 
-    <string name="program_day_pt">Piątek</string>
-    <string name="program_day_sob">Sobota</string>
-    <string name="program_day_nd">Niedziela</string>
+    <string name="menu_facebook_palac">Facebook Pałacu</string>
+    <string name="menu_facebook_guzooo">Facebook Guzooo</string>
+    <string name="menu_instagram_palac">Instagram Pałacu</string>
+    <string name="menu_otworz_link">Otwórz stronę w przeglądarce lub aplikacji</string>
+
+    <string name="error_read_database">Baza danych jest niedostępna</string>
+    <string name="error_read_database_on_program">Błąd bazy danych\nSpróbuj wyczyścić pamięć podęczną lub dane aplikacji\n\nUstawienia > Aplikacje > Dziki Zachód 2018 > Pamięć wewnętrzna</string>
+
+    <string name="szuflada_open">Otwórz szufladę</string>
+    <string name="szuflada_close">Zamknij szufladę</string>
+
+    <string name="program_day_1">Piątek</string>
+    <string name="program_day_2">Sobota</string>
+    <string name="program_day_3">Niedziela</string>
 
     <string name="program_otwarcie_imprezy">Otwarcie imprezy</string>
     <string name="program_taniec_indian">Pokaz tańców indiańskich</string>
@@ -29,10 +41,18 @@
     <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
     <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
 
-    <string name="wydarzenie_favorite">Ulubiony</string>
     <string name="wydarzenie_te_same">To wydarzenie w innym czasie</string>
     <string name="wydarzenie_ten_czas">Inne wydarzenia w tym czasie</string>
-    
+
+    <string name="wydarzenie_te_same_null">Brak tego wydarzenia w innym czasie</string>
+    <string name="wydarzenie_ten_czas_null">Brak innego wydarzenia w tym czasie</string>
+
+    <string name="place_wydarzenia">Wydarzenia w tym miejscu</string>
+
+    <string name="place_wydarzenia_null">Brak wydarzeń w tym miejscu</string>
+
+    <string name="check_box_favorite">Ulubiony</string>
+
     <string name="bilety_normal_price">normalny %1$dzł</string>
     <string name="bilety_reduced_price">ulgowy %1$dzł</string>
 
@@ -40,4 +60,37 @@
     <string name="bilety_palac">Zwiedzanie Pałacu</string>
     <string name="bilety_lochy">Zwiedzanie Lochów</string>
     <string name="bilety_labirynt">Labirynt</string>
+
+    <string name="mapa_type_zoo">Zwierzyniec</string>
+    <string name="mapa_type_eat">Żywność</string>
+    <string name="mapa_type_other">inne</string>
+
+    <string-array name="mapa_types">
+        <item>@string/mapa_type_zoo</item>
+        <item>@string/mapa_type_eat</item>
+        <item>@string/mapa_type_other</item>
+    </string-array>
+
+    <string name="mapa_title_scena">Scena</string>
+    <string name="mapa_title_pizza">Pizzeria Ancona</string>
+    <string name="mapa_title_wiata">Bizon Grill</string>
+
+    <string name="mapa_snippet_scena">Miejsce występów</string>
+    <string name="mapa_snippet_pizza">Pyszne pizze prosto z pieca</string>
+    <string name="mapa_snippet_wiata">Hamburgery, hot-dogi, frytki, dania z grilla</string>
+
+    <string name="mapa_other_title_tur">Tury</string>
+    <string name="mapa_other_title_strus">Struś</string>
+
+    <string name="spolecznosc_hasztag">#DzikiZachód2018</string>
+
+    <string name="home_like_events">Ulubione wydarzenia:</string>
+    <string name="home_like_places">Ulubione miejsca:</string>
+    <string name="home_recomended_events">Proponowane wydarzenia:</string>
+    <string name="home_recomended_places">Proponowane miejsca:</string>
+
+    <string name="home_like_events_null">Brak ulubionych wydarzeń\nPrzejdź do zakładki \"Program\" i wybierz ulubione wydarzenia </string>
+    <string name="home_like_places_null">Brak ulubionych miejsc\nOtwórz Mapę i wybierz ulubione miejsca</string>
+    <string name="home_recomended_events_null">Brak proponowanych wydarzeń</string>
+    <string name="home_recomended_places_null">Brak proponowanych miejsc</string>
 </resources>
