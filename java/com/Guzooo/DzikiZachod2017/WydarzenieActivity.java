@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +40,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
     private int day;
     private int description;
     private int imageRSC;
-    private boolean favorite;
+    private int favorite;
     private int place;
 
     private float Y;
@@ -63,8 +64,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
             Intent intent = new Intent(getApplicationContext(), MapActivity.class);
             intent.putExtra(MapActivity.EXTRA_Y, Y);
             intent.putExtra(MapActivity.EXTRA_X, X);
-            intent.putExtra(MapActivity.EXTRA_ZOOM, 19);
-            Log.d("Wyda", Y + " " + X );
+            intent.putExtra(MapActivity.EXTRA_ZOOM, 20);
             startActivity(intent);
         }
     }
@@ -72,13 +72,6 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wydarzenie);
-
-        TextView txtTime = findViewById(R.id.wydarzenie_time);
-        TextView txtDescription = findViewById(R.id.wydarzenie_description);
-        CheckBox checkFavorite = findViewById(R.id.wydarzenie_favorite);
-        nullCard = findViewById(R.id.wydarzenie_null);
-        nullCardText = findViewById(R.id.wydarzenie_null_text);
 
         try {
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -96,19 +89,21 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
                 day = cursor.getInt(3);
                 description = cursor.getInt(4);
                 imageRSC = cursor.getInt(5);
-                favorite = (cursor.getInt(6) == 1);
+                favorite = cursor.getInt(6);
                 place = cursor.getInt(7);
             }
 
-            cursor = db.query("PLACES",
-                    new String[]{"Y", "X"},
-                    "_id = ?",
-                    new String[]{Integer.toString(place)},
-                    null,null,null);
+            if(place != 0) {
+                cursor = db.query("PLACES",
+                        new String[]{"Y", "X"},
+                        "_id = ?",
+                        new String[]{Integer.toString(place)},
+                        null, null, null);
 
-            if(cursor.moveToFirst()){
-                Y = cursor.getFloat(0);
-                X = cursor.getFloat(1);
+                if (cursor.moveToFirst()) {
+                    Y = cursor.getFloat(0);
+                    X = cursor.getFloat(1);
+                }
             }
 
             cursor.close();
@@ -116,6 +111,21 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
         } catch (SQLiteException e) {
             Toast.makeText(this, R.string.error_read_database, Toast.LENGTH_SHORT).show();
         }
+
+        if(imageRSC != 0){
+            setContentView(R.layout.activity_wydarzenie);
+
+            ImageView imageView = findViewById(R.id.wydarzenie_image);
+            imageView.setImageResource(imageRSC);
+        } else {
+            setContentView(R.layout.activity_wydarzenie_no_image);
+        }
+
+        TextView txtTime = findViewById(R.id.wydarzenie_time);
+        TextView txtDescription = findViewById(R.id.wydarzenie_description);
+        CheckBox checkFavorite = findViewById(R.id.wydarzenie_favorite);
+        nullCard = findViewById(R.id.wydarzenie_null);
+        nullCardText = findViewById(R.id.wydarzenie_null_text);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -128,9 +138,11 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
         if (minute == 0) {
             hours += Integer.toString(0);
         }
-        hour = timeEnd / 60;
-        minute = timeEnd % 60;
-        if (hour >= 0) {
+
+        if (timeEnd >= 0) {
+            hour = timeEnd / 60;
+            minute = timeEnd % 60;
+
             hours += "-" + Integer.toString(hour) + ":" + Integer.toString(minute);
             if (minute == 0) {
                 hours += Integer.toString(0);
@@ -138,9 +150,15 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
         }
         txtTime.setText(hours);
 
-        txtDescription.setText(getString(description));
+        if(description != 0) {
+            txtDescription.setText(getString(description));
+        }
 
-        checkFavorite.setChecked(favorite);
+        if(favorite == 1 || favorite == 3) {
+            checkFavorite.setChecked(true);
+        } else {
+            checkFavorite.setChecked(false);
+        }
 
         if(savedInstanceState != null){
             btnOn = savedInstanceState.getInt(BUNDLE_BTN_NUM);
@@ -160,16 +178,27 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
                 break;
         }
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.wydarzenie_map);
-        mapFragment.getMapAsync(this);
+        if(place != 0) {
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.wydarzenie_map);
+            mapFragment.getMapAsync(this);
+        } else {
+            View v = findViewById(R.id.wydarzenie_map);
+            v.setVisibility(View.GONE);
+        }
     }
 
     public void onClickFavorite(View v){
-        CheckBox favorite = findViewById(R.id.wydarzenie_favorite);
+        CheckBox favoriteBox = findViewById(R.id.wydarzenie_favorite);
+
+        if(favoriteBox.isChecked()) {
+            favorite++;
+        }else {
+            favorite--;
+        }
 
         ContentValues eventValues = new ContentValues();
-        eventValues.put("FAVORITE", favorite.isChecked());
+        eventValues.put("FAVORITE", favorite);
 
         try{
             SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -197,7 +226,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
                     "((TIME_START >= ? AND TIME_START < ?) OR (TIME_END > ? AND TIME_END <= ?)) AND DAY = ? AND _id != ?",
                     new String[] {Integer.toString(timeStart), Integer.toString(timeEnd),Integer.toString(timeStart), Integer.toString(timeEnd), Integer.toString(day), Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null,
-                    "TIME_START, NAME");
+                    "TIME_START, TIME_END,  NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
@@ -230,7 +259,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
                     "NAME = ? AND _id != ?",
                     new String[] {Integer.toString(name),Integer.toString(getIntent().getIntExtra(EXTRA_ID, 0))},
                     null, null,
-                    "DAY, TIME_START, NAME");
+                    "DAY, TIME_START,  NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             RecyclerView recyclerView = findViewById(R.id.wydarzenie_recycler);
             recyclerView.setLayoutManager(layoutManager);
@@ -254,7 +283,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
         if(btnOld != null){
             btnOld.setTextColor(b.getTextColors());
         }
-        b.setTextColor(getResources().getColor(R.color.pressedText));
+        b.setTextColor(getResources().getColor(R.color.colorAccent));
         btnOld = b;
     }
 
@@ -308,6 +337,6 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
         });
 
         googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(Y, X)));
+                .position(new LatLng(Y, X)));
     }
 }

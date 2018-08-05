@@ -11,23 +11,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    <!--TODO:button na M-->
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jak dojechać"
-        android:onClick="onClickMapaGoogle"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!--TODO:button na M-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mapa_roar_to_event"
+            android:onClick="onClickMapaGoogle"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <LinearLayout
@@ -38,21 +38,93 @@
         android:background="@color/colorPrimary">
 
         <CheckBox
-            android:id="@+id/map_check_zoo"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/mapa_type_zoo"
-            android:checked="true"
-            android:buttonTint="@color/pressedText"
-            android:onClick="onClickCategory"/>
-
-        <CheckBox
             android:id="@+id/map_check_eat"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="@string/mapa_type_eat"
             android:checked="true"
+            android:buttonTint="@color/eat"
+            android:textColor="@color/eat"
+            android:onClick="onClickCategory" />
+
+        <CheckBox
+            android:id="@+id/map_check_attraction"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_event_attractions"
+            android:checked="true"
+            android:buttonTint="@color/attraction"
+            android:textColor="@color/attraction"
             android:onClick="onClickCategory"/>
 
+        <CheckBox
+            android:id="@+id/map_check_lunapark"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_lunapark"
+            android:checked="true"
+            android:buttonTint="@color/lunapark"
+            android:textColor="@color/lunapark"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_fun"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_fun"
+            android:checked="true"
+            android:buttonTint="@color/fun"
+            android:textColor="@color/fun"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_zoo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_zoo"
+            android:checked="true"
+            android:buttonTint="@color/zoo"
+            android:textColor="@color/zoo"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_medical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_medical"
+            android:checked="true"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_info"
+            android:checked="true"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_toalety"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_toalety"
+            android:checked="true"
+            android:buttonTint="@color/white"
+            android:textColor="@color/white"
+            android:onClick="onClickCategory"/>
+
+        <CheckBox
+            android:id="@+id/map_check_bezpieczenstwo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/mapa_type_bezpieczeństwo"
+            android:checked="true"
+            android:textColor="@color/bezpieczenstwo"
+            android:buttonTint="@color/bezpieczenstwo"
+            android:onClick="onClickCategory"/>
     </LinearLayout>
 </android.support.v4.widget.DrawerLayout>

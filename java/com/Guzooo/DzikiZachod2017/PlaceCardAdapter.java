@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class PlaceCardAdapter extends RecyclerView.Adapter<PlaceCardAdapter.ViewHolder> {
@@ -44,7 +43,13 @@ public class PlaceCardAdapter extends RecyclerView.Adapter<PlaceCardAdapter.View
         ImageView imageView = cardView.findViewById(R.id.place_card_image);
 
         if (cursor.moveToPosition(position)){
-            textView.setText(cursor.getInt(1));
+
+            if(cursor.getInt(1) != 0) {
+                textView.setText(cursor.getInt(1));
+            } else {
+                textView.setText(cursor.getInt(3));
+            }
+
             imageView.setImageResource(cursor.getInt(2));
 
             cardView.setOnClickListener(new View.OnClickListener() {

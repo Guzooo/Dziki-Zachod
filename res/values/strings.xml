@@ -24,22 +24,61 @@
     <string name="program_day_2">Sobota</string>
     <string name="program_day_3">Niedziela</string>
 
-    <string name="program_otwarcie_imprezy">Otwarcie imprezy</string>
-    <string name="program_taniec_indian">Pokaz tańców indiańskich</string>
-    <string name="program_taniec_country">Pokaz tańców country</string>
-    <string name="program_rozpoczencie_imprezy">Rozpoczęcie imprezy</string>
-    <string name="program_spektakl_dla_dzieci">Spektakl teatralny dla dzieci</string>
+    <string name="program_otwarcie_imprezy">Oficjalne otwarcie imprezy</string>
+    <string name="program_biesiada_przy_disco">Biesiada przy muzyce Disco</string>
+    <string name="program_blok_konkursow_zabaw">Blok konkursów i zabaw dla dzieci</string>
+    <string name="program_brzeszczykiewycz_krejzolka">Brzęszczykiewicz z Panią Kreizolką</string>
+    <string name="program_dyskoteka">DYSKOTEKA</string>
+    <string name="program_gala_disco">GALA DISCO</string>
+    <string name="program_gwiazda">Gwiazda wieczoru</string>
+    <string name="program_kabaret">Kabaret Wcięci Przypadkiem</string>
+    <string name="program_kadryl">Kadryl na koniach</string>
+    <string name="program_kadryl_pochodnie">Kadryl z pochodniami na koniach</string>
+    <string name="program_koncert_andrzej_przyjaciele">Koncert zespołu Andrzej i Przyjaciele</string>
+    <string name="program_koncert_koliber">Koncert zespołu KOLIBER</string>
+    <string name="program_koncert_maskotki">Maskotki koncert</string>
+    <string name="program_parada">Parada Country</string>
     <string name="program_fajerwerki">Pokaz fajerwerków</string>
-    <string name="program_koniec">Zakończenie imprezy</string>
+    <string name="program_pokaz_nauka_liniowego">Pokaz i nauka tańca liniowego</string>
+    <string name="program_pokaz_nauka_indian">Pokaz i nauka tańców indiańskich</string>
+    <string name="program_iluzja">Pokaz iluzji dla najmłodszych</string>
+    <string name="program_moda_historyczna">Pokaz mody historycznej na koniach</string>
+    <string name="program_country">Pokaz tańca country</string>
+    <string name="program_indian">Pokaz tańców indiańskich</string>
+    <string name="program_cyrkowe">Pokazy i zabawy cyrkowe dla dzieci</string>
+    <string name="program_prezentacja">Prezentacja atrakcji i sponsorów</string>
+    <string name="program_traperzy">Prezentacja grupy traperów</string>
+    <string name="program_rozpoczecie">Rozpoczęcie imprezy</string>
+    <string name="program_fontanny">Tańczące Fontanny</string>
+    <string name="program_brzeszczykiewicz">Zabawa z klaunem Brzęszczykiewiczem</string>
+    <string name="program_zywa_historia">Żywa lekcja historii konno</string>
 
-    <string name="program_opis_otwarcie_imprezy">Uroczyste rozpoczęcie imprezy "Dziki Zachód 2018"</string>
-    <string name="program_opis_taniec_indian">Tańce indiańskie w wykonianiu grupu WOKINI</string>
-    <string name="program_opis_taniec_country">Tańce country w wykonianiu grupy DANCING RIDERS</string>
-    <string name="program_opis_rozpoczecie_imprezy_1">Impreze rozpocznie gwazda1</string>
-    <string name="program_opis_rozpoczecie_imprezy_2">Impreze rozpocznie gwiazda2</string>
-    <string name="program_opis_spektakl_dla_dzieci">Spektakl dla dzieci</string>
-    <string name="program_opis_fajerwerki">Magiczny pokaz fajerwerków na tle pałacu</string>
-    <string name="program_opis_koniec">Zakończenie imprezy "Dziki Zachód 2018"</string>
+    <string name="program_opis_otwarcie_imprezy">Oficjalne otwarcie imprezy \„Dziki zachód 2018\”</string>
+<!--    <string name="program_opis_biesiada_przy_disco"></string>
+    <string name="program_opis_blok_konkursow_zabaw"></string>
+    <string name="program_opis_brzeszczykiewycz_krejzolka"></string>
+    <string name="program_opis_dyskoteka"></string>-->
+    <string name="program_opis_gala_disco">Wystąpią: Fox, Mega Dance, Jagoda i Brylant</string>
+    <string name="program_opis_gwiazda">Norbi - koncert</string>
+    <string name="program_opis_kabaret1">Pierwsze wejście</string>
+    <string name="program_opis_kabaret2">Drugie wejście</string>
+    <string name="program_opis_kadryl">Virtute &amp; Gratia</string>
+<!--    <string name="program_opis_koncert_andrzej_przyjaciele"></string>-->
+    <string name="program_opis_koncert1">Pierwsza część</string>
+    <string name="program_opis_koncert2">Druga część</string>
+<!--    <string name="program_opis_parada"></string>-->
+    <string name="program_opis_fajerwerki">Około 22:00\n\nna zakończenie</string>
+    <string name="program_opis_country">Dancing Riders</string>
+    <string name="program_opis_indian">Grupa Wokini</string>
+<!--    <string name="program_opis_iluzja"></string>
+    <string name="program_opis_moda_historyczna"></string>
+    <string name="program_opis_cyrkowe"></string>
+    <string name="program_opis_prezentacja"></string>
+    <string name="program_opis_traperzy"></string>
+    <string name="program_opis_rozpoczecie"></string>-->
+    <string name="program_opis_fontanny">Woda, światło i dźwięk</string>
+<!--    <string name="program_opis_brzeszczykiewicz"></string>
+    <string name="program_opis_zywa_historia"></string>-->
 
     <string name="wydarzenie_te_same">To wydarzenie w innym czasie</string>
     <string name="wydarzenie_ten_czas">Inne wydarzenia w tym czasie</string>
@@ -59,29 +98,76 @@
     <string name="bilety_safari">Safari Bizon</string>
     <string name="bilety_palac">Zwiedzanie Pałacu</string>
     <string name="bilety_lochy">Zwiedzanie Lochów</string>
-    <string name="bilety_labirynt">Labirynt</string>
+    <string name="bilety_pakiet1">Zwiedzanie Lochód + Zwiedzanie Pałacu + Safari Bizon</string>
+    <string name="bilety_labirynt">Labirynt w kukurydzy</string>
+    <string name="bilety_pakiet2">Zwiedzanie Lochód + Zwiedzanie Pałacu + Safari Bizon + Labirynt w kukurydzy</string>
+    <string name="bilety_bukowy">Labirynt bukowy</string>
 
-    <string name="mapa_type_zoo">Zwierzyniec</string>
-    <string name="mapa_type_eat">Żywność</string>
-    <string name="mapa_type_other">inne</string>
+    <string name="bilety_day_info">*Bilet ulgowy przysługuje dzieciom i młodzieży w wieku 4-12 lat po okazaniu dokumentu tożsamości.</string>
+    <string name="bilety_ulga_mlodziez">*Bilet ulgowy przysługuje dzieciom i młodzieży w wieku 4-16 lat po okazaniu dokumentu tożsamości.</string>
+    <string name="bilety_ulga_senior">*Bilet ulgowy przysługuje dzieciom i młodzieży w wieku 4-16 lat oraz seniorom 60+ po okazaniu dokumentu tożsamości.</string>
 
-    <string-array name="mapa_types">
-        <item>@string/mapa_type_zoo</item>
-        <item>@string/mapa_type_eat</item>
-        <item>@string/mapa_type_other</item>
-    </string-array>
+    <string name="mapa_type_event_attractions">Atrakcje imprezy</string>
+    <string name="mapa_type_zoo">Mini zoo</string>
+    <string name="mapa_type_eat">Katering</string>
+    <string name="mapa_type_lunapark">Wesołe miasteczko</string>
+    <string name="mapa_type_toalety">Toalety</string>
+    <string name="mapa_type_info">Punkt informacyjny</string>
+    <string name="mapa_type_medical">Punkt medyczny</string>
+    <string name="mapa_type_fun">Gry i zabawy</string>
+    <string name="mapa_type_parking">Parking</string>
+    <string name="mapa_type_bezpieczeństwo">Bezpieczeństwo</string>
+    <string name="mapa_type_other">Inne</string>
 
     <string name="mapa_title_scena">Scena</string>
-    <string name="mapa_title_pizza">Pizzeria Ancona</string>
-    <string name="mapa_title_wiata">Bizon Grill</string>
+    <string name="mapa_title_fosa">Fosa</string>
+    <string name="mapa_title_ujezdzalnia">Ujeżdżalnia</string>
+    <string name="mapa_title_pizzeria">Pizzeria Ancona</string>
+    <string name="mapa_title_grill">Bizon Grill</string>
+    <string name="mapa_title_oranzeria">Oranżeria</string>
+    <string name="mapa_title_taras">Taras</string>
+    <string name="mapa_title_labirynt">Labirynt</string>
+    <string name="mapa_title_plansza_golf">Wielkie gry planszowe, mini golf</string>
+    <string name="mapa_title_camping">Pole kempingowe</string>
 
-    <string name="mapa_snippet_scena">Miejsce występów</string>
-    <string name="mapa_snippet_pizza">Pyszne pizze prosto z pieca</string>
-    <string name="mapa_snippet_wiata">Hamburgery, hot-dogi, frytki, dania z grilla</string>
+    <string name="mapa_snippet_scena">Miejsce koncertów, pokazów i prezentacji grup rekonstrukcyjnych oraz zabaw tanecznych.</string>
+<!--    <string name="mapa_snippet_fosa"></string>
+    <string name="mapa_snippet_ujezdzalnia"></string> -->
+    <string name="mapa_snippet_pizzeria">Mieści się w pałacowych wnętrzach. Jest idealnym miejscem na spotkanie ze znajomymi, jak i na romantyczny wieczór we dwoje.\n\nPizzeria wyposażona jest w profesjonalny stół bilardowy, TV, gry planszowe. Do dyspozycji naszych gości są 3 sale.</string>
+    <string name="mapa_snippet_grill">Frytki\? Hot-dog\? Hamburger\? Karkówka\? A może BizonBurger\? To tu posilisz się, orzeźwisz zimnym napojem lub piwem.</string>
+    <string name="mapa_snippet_oranzeria">Tu znajduje się nasza kawiarnia. Polecamy kawy, herbaty i desery!</string>
+    <string name="mapa_snippet_taras">Zapraszamy do naszej restauracji gdzie mogą Państwo spróbować dań z mięsa bizona i wielu innych.</string>
+    <string name="mapa_snippet_labirynt">Chcesz sprawdzić swoją wiedzę i orientację w terenie\? Zapraszamy do kukurydzianego labiryntu który nawiązuje do obchodów 100-lecia odzyskania przez Polskę niepodległości! Naszych najmłodszych gości zachęcamy również do odwiedzenia labiryntu bukowego!\n\nCeny biletów znajdziesz w zakładce \"Bilety\"</string>
+    <string name="mapa_snippet_lunapark">Wielki lunapark z licznymi atrakcjami.</string>
+    <string name="mapa_snippet_camping">Jeśli chcesz przyjechać na imprezę swoim kamperem przejdź do zakładki \"Informacje\" i znajdź przycisk \"Zapisy na kemping\"
+</string>
 
     <string name="mapa_other_title_tur">Tury</string>
     <string name="mapa_other_title_strus">Struś</string>
+    <string name="mapa_other_title_kasa">Kasa</string>
+    <string name="mapa_other_title_indian">Indiańska wioska</string>
+    <string name="mapa_other_title_traper">Obóz traperów</string>
+    <string name="mapa_other_title_zloto">Płukanie złota</string>
+    <string name="mapa_other_title_mustang">Zlot mustangów</string>
+    <string name="mapa_other_title_byk">Byk rodeo</string>
+    <string name="mapa_other_title_kucyki">Kraina kucyka</string>
+    <string name="mapa_other_title_plac_zabaw">Plac zabaw</string>
+    <string name="mapa_other_title_militaria">Wystawa militariów</string>
+    <string name="mapa_other_title_bizon">Bizony</string>
+    <string name="mapa_other_title_miejsce_zbiorki">Miejsce zbiórki osób do ewakuacji</string>
+    <string name="mapa_other_title_punkt_przyjecia">Punkt przyjęcia służb ratunkowych i policji</string>
+    <string name="mapa_other_title_hydrant">Hydrant</string>
+    <string name="mapa_other_title_gasnica">Sprzęt gaśniczy</string>
 
+    <string name="mapa_other_snippet_kasa">Ceny biletów wstępu znajdziesz w zakładce \"Bilety\"</string>
+    <string name="mapa_other_snippet_kasa2">Ceny atrakcji znajdziesz w zakładce \"Bilety\"</string>
+<!--    <string name="mapa_other_snippet_indian"></string>
+    <string name="mapa_other_snippet_traper"></string>
+    <string name="mapa_other_snippet_zloto"></string>
+    <string name="mapa_other_snippet_mustang"></string>-->
+
+    <string name="mapa_roar_to_event">Jak dojechać</string>
+    
     <string name="spolecznosc_hasztag">#DzikiZachód2018</string>
 
     <string name="home_like_events">Ulubione wydarzenia:</string>
@@ -93,4 +179,13 @@
     <string name="home_like_places_null">Brak ulubionych miejsc\nOtwórz Mapę i wybierz ulubione miejsca</string>
     <string name="home_recomended_events_null">Brak proponowanych wydarzeń</string>
     <string name="home_recomended_places_null">Brak proponowanych miejsc</string>
+
+    <string name="info_facebook">Facebook</string>
+    <string name="info_youtube">YouTube</string>
+    <string name="info_www">Strona internetowa</string>
+    <string name="info_camping">Zapisy na kemping</string>
+    <string name="info_room">Rezerwacja pokoi</string>
+    <string name="info_ocen_app">Oceń aplikacje:</string>
+    <string name="info_formularz">Anonimowy formularz</string>
+    <string name="info_google_play">Publiczna opinia w google play</string>
 </resources>

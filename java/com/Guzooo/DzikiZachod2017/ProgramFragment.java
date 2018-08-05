@@ -9,11 +9,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class ProgramFragment extends Fragment implements View.OnClickListener {
 
@@ -33,7 +36,6 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    //TODO: otwiera dzisiejszy dzien
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_program, container, false);
@@ -52,7 +54,20 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         if(savedInstanceState != null){
             title = savedInstanceState.getString(BUNDLE_DAY);
         } else if (title == null){
-            title = getString(R.string.program_day_1);
+            Calendar c = Calendar.getInstance();
+            int msc = c.get(Calendar.MONTH);
+            if(msc == 7){
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                if(day == 11){
+                    title = getString(R.string.program_day_2);
+                } else if(day == 12){
+                    title = getString(R.string.program_day_3);
+                } else {
+                    title = getString(R.string.program_day_1);
+                }
+            } else {
+                title = getString(R.string.program_day_1);
+            }
         }
 
         if(cursor == null) {
@@ -127,7 +142,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
         if(btnOld != null){
             btnOld.setTextColor(b.getTextColors());
         }
-        b.setTextColor(getResources().getColor(R.color.pressedText));
+        b.setTextColor(getResources().getColor(R.color.colorAccent));
         btnOld = b;
     }
 
@@ -140,7 +155,7 @@ public class ProgramFragment extends Fragment implements View.OnClickListener {
                     "DAY = ?",
                     new String[] {Integer.toString(day)},
                     null, null,
-                    "TIME_START, NAME");
+                    "TIME_START, TIME_END, NAME");
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             programRecycle.setLayoutManager(layoutManager);
             adapter = new ProgramCardAdapter(cursor, nullCard);

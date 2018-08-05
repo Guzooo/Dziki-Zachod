@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
-    <color name="pressedText">#FFFF00</color>
+    <color name="colorPrimary">#6D6C49</color>
+    <color name="colorPrimaryDark">#5E5A33</color>
+    <color name="colorAccent">#FFFF00</color>
+    
+    <color name="attraction">#E9967A</color>
+    <color name="fun">#FFFACD</color>
+    <color name="eat">#0000FF</color>
+    <color name="lunapark">#FFFF00</color>
+    <color name="zoo">#87CEFA</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bezpieczenstwo">#FFA500</color>
 </resources>

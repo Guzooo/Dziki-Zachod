@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ public class PlaceActivity extends Activity {
     private int type;
     private float y;
     private float x;
-    private boolean favorite;
+    private int favorite;
 
     private SQLiteDatabase db;
     private Cursor cursor;
@@ -41,6 +42,7 @@ public class PlaceActivity extends Activity {
 
         TextView txtDescription = findViewById(R.id.place_description);
         TextView txtType = findViewById(R.id.place_type);
+        ImageView imageView = findViewById(R.id.place_image);
         CheckBox checkFavorite = findViewById(R.id.place_favorite);
 
         try {
@@ -59,7 +61,7 @@ public class PlaceActivity extends Activity {
                 type = cursor.getInt(3);
                 y = cursor.getFloat(4);
                 x = cursor.getFloat(5);
-                favorite = (cursor.getInt(6) == 1);
+                favorite = cursor.getInt(6);
             }
 
             cursor.close();
@@ -69,10 +71,28 @@ public class PlaceActivity extends Activity {
         }
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(getString(name));
+
+        if(name != 0) {
+            getActionBar().setTitle(getString(name));
+        } else {
+            getActionBar().setTitle(getString(type));
+        }
+
+        if(imageRSC != 0){
+            imageView.setImageResource(imageRSC);
+        }
+
+        if(description != 0){
+            txtDescription.setText(getString(description));
+        }
+
+        if(favorite == 1 || favorite == 3){
+            checkFavorite.setChecked(true);
+        } else {
+            checkFavorite.setChecked(false);
+        }
+
         txtType.setText(getString(type));
-        txtDescription.setText(getString(description));
-        checkFavorite.setChecked(favorite);
 
         if(cursor == null) {
             try {
@@ -107,10 +127,16 @@ public class PlaceActivity extends Activity {
     }
 
     public void onClickFavorite(View v){
-        CheckBox favorite = findViewById(R.id.place_favorite);
+        CheckBox favoriteBox = findViewById(R.id.place_favorite);
+
+        if(favoriteBox.isChecked()) {
+            favorite++;
+        }else {
+            favorite--;
+        }
 
         ContentValues placeValues = new ContentValues();
-        placeValues.put("FAVORITE", favorite.isChecked());
+        placeValues.put("FAVORITE", favorite);
 
         try{
             SQLiteOpenHelper openHelper = new ProgramHelper(this);

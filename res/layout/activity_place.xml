@@ -22,6 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"/>
 
@@ -30,6 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"/>
 
             <CheckBox
@@ -37,21 +39,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/check_box_favorite"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:onClick="onClickFavorite"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/place_wydarzenia"
                 android:theme="@style/TextTitle"
+                android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"/>
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/place_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:layout_weight="1"/>
     </LinearLayout>
 
     <android.support.v7.widget.CardView

@@ -72,7 +72,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
     }
 
-    //TODO: FragmentStatePagerAdapter gdy bedzię cieło
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fragmentManager) {
@@ -91,8 +90,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 3:
                     return new BiletyFragment();
                 case 4:
-                    return new GwiazdaFragment();
-                case 5:
                     return new InfoFragment();
             }
             return null;
@@ -100,7 +97,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
 
         @Override
         public int getCount() {
-            return 6;
+            return 5;
         }
 
         @Override
@@ -115,8 +112,6 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 case 3:
                     return getString(R.string.fragment_bilety_name);
                 case 4:
-                    return getString(R.string.fragment_gwiazdy_szeryfa_name);
-                case 5:
                     return getString(R.string.fragment_info_name);
             }
             return null;
@@ -126,7 +121,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
             switch (position){
                 case 2:
                     return getString(R.string.spolecznosc_hasztag);
-                case 5:
+                case 4:
                     return getString(R.string.app_G);
             }
             return getString(R.string.app_name);
@@ -185,7 +180,7 @@ public class StartActivity extends Activity implements ActionBar.TabListener {
                 return true;
 
             case R.id.action_facebook_guzooo:
-                SpolecznoscFragment.ClickSpolecznoscioweMedia(""); //TODO:Link do mojego fanpagea
+                SpolecznoscFragment.ClickSpolecznoscioweMedia("https://www.facebook.com/GuzoooApps");
                 return true;
 
             default:

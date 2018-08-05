@@ -20,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -35,9 +36,22 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
     private GoogleMap mMap;
 
-    private ArrayList<Marker> typeZoo = new ArrayList<>();
     private ArrayList<Marker> typeEat = new ArrayList<>();
+    private ArrayList<Marker> typeAttraction = new ArrayList<>();
+    private ArrayList<Marker> typeLunapark = new ArrayList<>();
     private ArrayList<Marker> typeOther = new ArrayList<>();
+    private ArrayList<Marker> typeFun = new ArrayList<>();
+
+    private ArrayList<Marker> typeOtherZoo = new ArrayList<>();
+    private ArrayList<Marker> typeOtherAttraction = new ArrayList<>();
+    private ArrayList<Marker> typeOtherToalety = new ArrayList<>();
+    private ArrayList<Marker> typeOtherFun = new ArrayList<>();
+    private ArrayList<Marker> typeOtherEat = new ArrayList<>();
+    private ArrayList<Marker> typeOtherInfo = new ArrayList<>();
+    private ArrayList<Marker> typeOtherMedical = new ArrayList<>();
+    private ArrayList<Marker> typeOtherOther = new ArrayList<>();
+    private ArrayList<Marker> typeOtherParking = new ArrayList<>();
+    private ArrayList<Marker> typeOtherBezpieczenstwo = new ArrayList<>();
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -97,8 +111,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(getIntent().getFloatExtra(EXTRA_Y, 50.596184f), getIntent().getFloatExtra(EXTRA_X, 21.099909f))));
-        mMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(50.593606, 21.096510), new LatLng(50.598854, 21.103208)));
-
+        mMap.setLatLngBoundsForCameraTarget(new LatLngBounds(new LatLng(50.593008, 21.093231), new LatLng(50.598361, 21.105293)));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(getIntent().getIntExtra(EXTRA_ZOOM,17)));
         mMap.setMaxZoomPreference(20);
         mMap.setMinZoomPreference(16);
@@ -123,13 +136,25 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
             }
         });
 
-        showPlaceWithDetails(R.string.mapa_type_other, typeOther, 0);
-        showPlaceWithDetails(R.string.mapa_type_eat, typeEat, R.id.map_check_eat);
+        showPlaceWithDetails(R.string.mapa_type_other, typeOther, 0, R.drawable.marker_other);
+        showPlaceWithDetails(R.string.mapa_type_eat, typeEat, R.id.map_check_eat, R.drawable.marker_eat);
+        showPlaceWithDetails(R.string.mapa_type_event_attractions, typeAttraction, R.id.map_check_attraction, R.drawable.marker_attraction);
+        showPlaceWithDetails(R.string.mapa_type_lunapark, typeLunapark, R.id.map_check_lunapark, R.drawable.marker_lunapark);
+        showPlaceWithDetails(R.string.mapa_type_fun, typeFun, R.id.map_check_fun, R.drawable.marker_fun);
 
-        showPlace(R.string.mapa_type_zoo, typeZoo, R.id.map_check_zoo);
+        showPlace(R.string.mapa_type_zoo, typeOtherZoo, R.id.map_check_zoo,  R.drawable.marker_zoo);
+        showPlace(R.string.mapa_type_other, typeOtherOther, 0, R.drawable.marker_other);
+        showPlace(R.string.mapa_type_event_attractions, typeOtherAttraction, R.id.map_check_attraction, R.drawable.marker_attraction);
+        showPlace(R.string.mapa_type_toalety, typeOtherToalety, R.id.map_check_toalety, R.drawable.marker_wc);
+        showPlace(R.string.mapa_type_fun, typeOtherFun, R.id.map_check_fun, R.drawable.marker_fun);
+        showPlace(R.string.mapa_type_info, typeOtherInfo, R.id.map_check_info, R.drawable.marker_info);
+        showPlace(R.string.mapa_type_medical, typeOtherMedical, R.id.map_check_medical, R.drawable.marker_medical);
+        showPlace(R.string.mapa_type_eat, typeOtherEat, R.id.map_check_eat, R.drawable.marker_eat);
+        showPlace(R.string.mapa_type_parking, typeOtherParking, 0, R.drawable.marker_parking);
+        showPlace(R.string.mapa_type_bezpieczeństwo, typeOtherBezpieczenstwo, R.id.map_check_bezpieczenstwo, R.drawable.marker_bezpieczenstwo);
     }
 
-    private void showPlaceWithDetails(int type, ArrayList<Marker> list, int viewId) {
+    private void showPlaceWithDetails(int type, ArrayList<Marker> list, int viewId, int imageId) {
         if(list.isEmpty()) {
             try {
                 SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -145,6 +170,10 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         list.add(mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(cursor.getFloat(1), cursor.getFloat(2)))
                                 .snippet(Integer.toString(cursor.getInt(0)))));
+
+                        if(imageId != 0){
+                            list.get(list.size()-1).setIcon(BitmapDescriptorFactory.fromResource(imageId));
+                        }
                     } while (cursor.moveToNext());
 
                     cursor.close();
@@ -164,7 +193,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         }
     }
 
-    private void showPlace(int type, ArrayList<Marker> list, int viewId){
+    private void showPlace(int type, ArrayList<Marker> list, int viewId, int imageId){
         if(list.isEmpty()) {
             try {
                 SQLiteOpenHelper openHelper = new ProgramHelper(this);
@@ -178,11 +207,20 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 if (cursor.moveToFirst()) {
                     do {
                         list.add(mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(cursor.getFloat(2), cursor.getFloat(3)))
-                                .title(getString(cursor.getInt(0)))));
+                                .position(new LatLng(cursor.getFloat(2), cursor.getFloat(3)))));
 
                         if (cursor.getInt(1) != 0) {
                             list.get(list.size() - 1).setSnippet(getString(cursor.getInt(1)));
+                        }
+
+                        if (cursor.getInt(0) != 0){
+                            list.get(list.size() - 1).setTitle(getString(cursor.getInt(0)));
+                        } else {
+                            list.get(list.size() - 1).setTitle(getString(type));
+                        }
+
+                        if(imageId != 0){
+                            list.get(list.size()-1).setIcon(BitmapDescriptorFactory.fromResource(imageId));
                         }
                     } while (cursor.moveToNext());
 
@@ -208,16 +246,48 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 
         switch (v.getId()){
             case R.id.map_check_zoo:
-                showPlace(R.string.mapa_type_zoo, typeZoo, v.getId());
+                showPlace(R.string.mapa_type_zoo, typeOtherZoo, v.getId(), R.drawable.marker_zoo);
                 break;
+
             case R.id.map_check_eat:
-                showPlaceWithDetails(R.string.mapa_type_eat, typeEat, v.getId());
+                showPlaceWithDetails(R.string.mapa_type_eat, typeEat, v.getId(), R.drawable.marker_eat);
+                showPlace(R.string.mapa_type_eat, typeOtherEat, v.getId(), R.drawable.marker_eat);
+                break;
+
+            case R.id.map_check_attraction:
+                showPlaceWithDetails(R.string.mapa_type_event_attractions, typeAttraction, v.getId(), R.drawable.marker_attraction);
+                showPlace(R.string.mapa_type_event_attractions, typeOtherAttraction, v.getId(), R.drawable.marker_attraction);
+                break;
+
+            case R.id.map_check_fun:
+                showPlaceWithDetails(R.string.mapa_type_fun, typeFun, v.getId(), R.drawable.marker_fun);
+                showPlace(R.string.mapa_type_fun, typeOtherFun, v.getId(), R.drawable.marker_fun);
+                break;
+
+            case R.id.map_check_info:
+                showPlace(R.string.mapa_type_info, typeOtherInfo, v.getId(), R.drawable.marker_info);
+                break;
+
+            case R.id.map_check_lunapark:
+                showPlaceWithDetails(R.string.mapa_type_lunapark, typeLunapark, v.getId(), R.drawable.marker_lunapark);
+                break;
+
+            case R.id.map_check_medical:
+                showPlace(R.string.mapa_type_medical, typeOtherMedical, v.getId(), R.drawable.marker_medical);
+                break;
+
+            case R.id.map_check_toalety:
+                showPlace(R.string.mapa_type_toalety, typeOtherToalety, v.getId(), R.drawable.marker_wc);
+                break;
+
+            case R.id.map_check_bezpieczenstwo:
+                showPlace(R.string.mapa_type_bezpieczeństwo, typeOtherBezpieczenstwo, R.id.map_check_bezpieczenstwo, R.drawable.marker_bezpieczenstwo);
                 break;
         }
     }
 
     public void onClickMapaGoogle(View view){
-        Uri uri = Uri.parse("https://www.google.pl/maps/dir//Parking,+Kurozw%C4%99ki/@50.5944718,21.0619917,11802m/data=!3m1!1e3!4m9!4m8!1m0!1m5!1m1!1s0x4717e332b7cb3a21:0xe37cffbd88ac840b!2m2!1d21.097011!2d50.594477!3e0");
+        Uri uri = Uri.parse("https://www.google.pl/maps/dir//50.5946645,21.0955824/@50.5939712,21.0988753,757m/data=!3m1!1e3!4m2!4m1!3e0");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }

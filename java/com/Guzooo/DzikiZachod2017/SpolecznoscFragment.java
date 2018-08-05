@@ -33,7 +33,7 @@ public class SpolecznoscFragment extends Fragment {
     private static boolean clearHistory;
 
     public SpolecznoscFragment() {
-        // Required empty public constructor
+
     }
 
    @Override
