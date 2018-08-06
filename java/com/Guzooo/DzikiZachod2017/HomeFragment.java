@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
 
             Animation wejscie = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.wejscie);
 
-            Uri uri = Uri.parse("android.resource://com.Guzooo.DzikiZachod2017/" + R.raw.anim_logo);
+            Uri uri = Uri.parse("android.resource://pl.Guzooo.DzikiZachod/" + R.raw.anim_logo);
             videoView.setVideoURI(uri);
 
             contener.startAnimation(wejscie);

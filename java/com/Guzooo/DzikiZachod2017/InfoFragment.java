@@ -16,7 +16,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_info, container, false);
@@ -67,7 +66,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 getPage("https://docs.google.com/forms/d/e/1FAIpQLSeep50BYT6xukwSgcZRnKv5FvqLR8CpQWiKswrxflkWQzVrjg/viewform");
                 break;
             case R.id.info_opinia:
-                getPage("https://play.google.com/store/apps/details?id=com.Guzooo.DzikiZachod2017");
+                getPage("https://play.google.com/store/apps/details?id=pl.Guzooo.DzikiZachod");
                 break;
         }
     }
