@@ -15,7 +15,7 @@ public class BiletyFragment extends Fragment {
 
 
     public BiletyFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -45,7 +45,7 @@ public class BiletyFragment extends Fragment {
                 getString(R.string.bilety_normal_price, 20),
                 getString(R.string.bilety_normal_price, 6),
                 getString(R.string.bilety_normal_price, 25),
-                ""};
+                "-"};
 
         String[] reducedPrices = new String[] {
                 getString(R.string.bilety_reduced_price, 3),
@@ -69,7 +69,7 @@ public class BiletyFragment extends Fragment {
                 getString(R.string.bilety_ulga_senior),
                 getString(R.string.bilety_ulga_senior),
                 getString(R.string.bilety_ulga_senior),
-                ""};
+                "*"};
 
         RecyclerView recyclerView = layout.findViewById(R.id.bilety_recycler);
 

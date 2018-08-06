@@ -41,7 +41,7 @@ public class ProgramHelper extends SQLiteOpenHelper {
             AddEvent(db, R.string.program_moda_historyczna, 1110, 1140, R.string.program_day_1, 0, 0, 0, 2);
             AddEvent(db, R.string.program_biesiada_przy_disco, 1140, 1320, R.string.program_day_1, 0, 0, 0, 1);
             AddEvent(db, R.string.program_rozpoczecie, 600, 615, R.string.program_day_2, 0, 0, 0, 1);
-            AddEvent(db, R.string.program_blok_konkursow_zabaw, 620, 660, R.string.program_day_2, 0, 0, 0, 0);
+            AddEvent(db, R.string.program_blok_konkursow_zabaw, 620, 660, R.string.program_day_2, 0, 0, 0, 1);
             AddEvent(db, R.string.program_indian, 660, 690, R.string.program_day_2, R.string.program_opis_indian, R.drawable.taniec_indian, 0, 1);
             AddEvent(db, R.string.program_country, 690, 720, R.string.program_day_2, R.string.program_opis_country, R.drawable.taniec_country, 0 , 1);
             AddEvent(db, R.string.program_iluzja, 720, 750, R.string.program_day_2, 0, 0, 0, 1);
@@ -146,7 +146,7 @@ public class ProgramHelper extends SQLiteOpenHelper {
             AddPlaceOther(db, R.string.mapa_other_title_gasnica, 0, R.string.mapa_type_bezpieczeństwo, 50.597155f, 21.100341f);
             AddPlaceOther(db, R.string.mapa_other_title_gasnica, 0, R.string.mapa_type_bezpieczeństwo, 50.596824f, 21.099686f);
             AddPlaceOther(db, 0, 0, R.string.mapa_type_eat, 50.596148f, 21.099644f);
-            AddPlaceOther(db, 0, 0, R.string.mapa_type_eat, 50.596558f, 21.100354f);
+            AddPlaceOther(db, 0, 0, R.string.mapa_type_eat, 50.596558f, 21.100330f);
         }
     }
 

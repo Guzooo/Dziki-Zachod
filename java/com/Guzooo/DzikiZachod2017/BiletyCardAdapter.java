@@ -36,10 +36,10 @@ public class BiletyCardAdapter extends RecyclerView.Adapter<BiletyCardAdapter.Vi
         TextView textSecond = cardView.findViewById(R.id.text_reduced_price);
         TextView textLitle = cardView.findViewById(R.id.bilety_card_dodatkowe_info);
 
-        setTexts(titles, title, position);
-        setTexts(textsFirst, textFirst, position);
-        setTexts(textsSecond, textSecond, position);
-        setTexts(textsLitle, textLitle, position);
+        title.setText(titles[position]);
+        textFirst.setText(textsFirst[position]);
+        textSecond.setText(textsSecond[position]);
+        textLitle.setText(textsLitle[position]);
     }
 
     @Override
@@ -54,11 +54,5 @@ public class BiletyCardAdapter extends RecyclerView.Adapter<BiletyCardAdapter.Vi
         this.textsLitle = textsLitle;
     }
 
-    private void setTexts (String[] tabela, TextView textView, int position){
-        if(tabela[position].equals("")){
-            textView.setVisibility(View.GONE);
-        } else {
-            textView.setText(tabela[position]);
-        }
-    }
+
 }

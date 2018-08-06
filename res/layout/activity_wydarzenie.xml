@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/check_box_favorite"
-                android:onClick="onClickFavorite"/>
+                android:onClick="onClickFavorite"
+                android:buttonTint="@color/colorPrimary"/>
         </LinearLayout>
 
         <ImageView
@@ -79,7 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- TODO: Theme buttonów ogarnąć dla M-->
         <Button
             android:id="@+id/wydarzenie_btn_inne_wyd"
             android:layout_width="match_parent"

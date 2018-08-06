@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -317,7 +316,6 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
 
         googleMap.setOnMapClickListener(new onClickListener());
 
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Y, X)));
         googleMap.moveCamera(CameraUpdateFactory.zoomTo(17));
         googleMap.setMapType(googleMap.MAP_TYPE_SATELLITE);
         googleMap.getUiSettings().setMapToolbarEnabled(false);
@@ -338,5 +336,6 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
 
         googleMap.addMarker(new MarkerOptions()
                 .position(new LatLng(Y, X)));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Y, X)));
     }
 }
