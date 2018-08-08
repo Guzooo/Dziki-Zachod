@@ -182,7 +182,7 @@ public class WydarzenieActivity extends FragmentActivity implements OnMapReadyCa
                     .findFragmentById(R.id.wydarzenie_map);
             mapFragment.getMapAsync(this);
         } else {
-            View v = findViewById(R.id.wydarzenie_map);
+            View v = findViewById(R.id.wydarzenie_card_map);
             v.setVisibility(View.GONE);
         }
     }

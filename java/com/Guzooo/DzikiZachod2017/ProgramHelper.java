@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ProgramHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "program";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     ProgramHelper(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -147,6 +147,16 @@ public class ProgramHelper extends SQLiteOpenHelper {
             AddPlaceOther(db, R.string.mapa_other_title_gasnica, 0, R.string.mapa_type_bezpieczeństwo, 50.596824f, 21.099686f);
             AddPlaceOther(db, 0, 0, R.string.mapa_type_eat, 50.596148f, 21.099644f);
             AddPlaceOther(db, 0, 0, R.string.mapa_type_eat, 50.596558f, 21.100330f);
+        }
+
+        if(oldVersion < 2){
+            ContentValues placeValue = new ContentValues();
+            placeValue.put("IMAGE_RSC", R.drawable.zz_wielkie_gry);
+
+            db.update("PLACES",
+                    placeValue,
+                    "_id = ?",
+                    new String[] {Integer.toString(13)});
         }
     }
 

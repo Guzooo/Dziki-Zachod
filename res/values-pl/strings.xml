@@ -81,9 +81,9 @@
     <string name="bilety_safari">Safari Bizon</string>
     <string name="bilety_palac">Zwiedzanie Pałacu</string>
     <string name="bilety_lochy">Zwiedzanie Lochów</string>
-    <string name="bilety_pakiet1">Zwiedzanie Lochód + Zwiedzanie Pałacu + Safari Bizon</string>
+    <string name="bilety_pakiet1">Zwiedzanie Lochów + Zwiedzanie Pałacu + Safari Bizon</string>
     <string name="bilety_labirynt">Labirynt w kukurydzy</string>
-    <string name="bilety_pakiet2">Zwiedzanie Lochód + Zwiedzanie Pałacu + Safari Bizon + Labirynt w kukurydzy</string>
+    <string name="bilety_pakiet2">Zwiedzanie Lochów + Zwiedzanie Pałacu + Safari Bizon + Labirynt w kukurydzy</string>
     <string name="bilety_bukowy">Labirynt bukowy</string>
 
     <string name="bilety_day_info">*Bilet ulgowy przysługuje dzieciom i młodzieży w wieku 4-12 lat po okazaniu dokumentu tożsamości.</string>
